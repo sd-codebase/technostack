@@ -1,0 +1,213 @@
+vesrions.js
+1-
+JavaScript was invented by Brendan Eich in 1995, and became an ECMA standard in 1997.
+
+ECMAScript is the official name of the language.
+
+ECMAScript versions have been abbreviated to ES1, ES2, ES3, ES5, and ES6.
+
+2-
+Since 2016, versions are named by year (ECMAScript 2016, 2017, 2018, 2019, 2020).
+
+Conclude-
+The First Main Revision was released in 2009 i.e ES5
+The Second Revision was released in 2015 i.e. ES6
+Yearly Additions (2016, 2017, 2018, 2019, 2020)
+We will see what are the major features realeased with each version of JavaScript
+
+ES6.js
+
+1-
+let and const keyword to define block scoped variables
+Arrow functions short syntax to declare functions
+for/of loop to iterate through arrays
+Map and set objects
+Classes syntax
+Promise Object
+Symbol Premetive type just like number and string
+Default value for parameter
+Rest parameter syntax i.e 3dots
+String function i.e includes, startsWith, endsWith
+Array Methods i.e. from, keys, find, findIndex
+New Math Methods
+Number properties and Methods
+New Global Method
+Object.entries
+and Javascript Modules
+
+2-
+The let keyword allows you to declare a variable with block scope.
+
+3-
+The const keyword allows you to declare a constant with block scope
+
+4-
+Arrow functions allows a short syntax for writing function expressions.
+You don't need the function keyword, the return keyword, and the curly brackets
+-Arrow functions do not have their own this. They are not well suited for defining object methods.
+-Arrow functions are not hoisted. They must be defined before they are used.
+
+5-
+The JavaScript for/of statement loops through the values of an iterable objects.
+The for/of loop has the this syntax:
+
+6-
+We create map using new keyword as you can see here new Map()
+set items using set method, and read value of specific key using get method
+
+7-
+Create set using new keyword like this, new Set()
+add items using add methods
+
+8-
+JavaScript Classes are templates for JavaScript Objects.
+Use the keyword class to create a class.
+Always add a method named constructor()
+to create an object from a class use new keyword eg. we have created myCar1 object using new Car("Ford", 2014);
+
+9-
+The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value
+If you can see this here we have created one promise using new Promise() and passing it one callback function which takes 2 callbacks
+resolve when successful
+or reject when error
+If promise fullfils first function executes
+If promise rejects second function executes
+
+10-
+ES6 allows function parameters to have default values.
+Here we have passed value for only x variable and function automatically pick default value for y which we haven't passed
+
+11-
+The rest parameter (...) allows a function to treat an indefinite number of arguments as an array:
+this function sum will collect all parameters in params variable as array, and wil return the sum of all parameters
+
+12-
+The includes() method returns true if a string contains a specified value, otherwise false:
+The startsWith() method returns true if a string begins with a specified value, otherwise false:
+The endsWith() method returns true if a string ends with a specified value, otherwise false:
+
+13-
+The Array.from() method Create an Array from a String
+The keys() method returns an Array with the keys, return array of indexes in our case
+The find() method returns the value of the first array element that passes a test function. returning 25 in our case
+The findIndex() method returns the index of the first array element that passes a test function. else returns -1
+
+14-
+ES6 added the these static properties to the Number object:
+ES6 added 2 new static methods to the Number object:
+isInteger() method returns true if given number is integer
+isSafeInteger() method returns true if given number is in range from Number.MIN_SAFE_INTEGER to Number.MAX_SAFE_INTEGER
+
+15-
+The global isFinite() method returns false if the argument is Infinity or NaN. Otherwise it returns true
+The global isNaN() method returns true if the argument is NaN. Otherwise it returns false:
+
+16-
+Object.entries returns arrays of combination of key and element
+In our case it returns 0-Banana, 1-Orange and so on
+
+17-
+Modules are imported in two differen ways
+named exports and default exeports
+here if you see the person.js file,  name and age as named exports
+and from message.js file we have exported a string as default export
+
+
+ECMAScript 2016.js
+
+1-
+The exponentiation operator (**) raises the first operand to the power of the second operand.
+eg here x rais to 2 i.e. 5 rais to 2 equal to 25
+this operator produces the same result as Math.pow(x, y)
+
+2-
+ECMAScript 2016 introduced Array.prototype.includes to arrays.
+This allows us to check if an element is present in an array.
+If element found in array returns true else return false
+
+
+ECMAScript 2017.js
+
+1-
+ECMAScript 2017 added two String methods: padStart and padEnd to support padding at the beginning and at the end of a string.
+Here when we apply padStart method to a string it adds 0000 at the start of string
+and when we apply padENd method to a string it adds 0000 at the end of string
+
+2-
+Please note this Object.entries() method is a static method and ES6 entries() method is instance method
+this Object.entries() mothod take an object as parameter. and returns combinations of key and value in array format
+here in our example it returns ['firstName', 'John'] ['lastName', 'Doe'] combinations and so on..
+
+3-
+Object.values are similar to Object.entries, but returns a single dimension array of the object values
+Object.values() method used to collect values of all properties in an object.
+here, in our example returns ['John' ,'Deo', 50, 'blue'];
+
+4-
+async/await is new syntax to work with promises, this is more readable syntax than Promise.then();
+we use try-catch to handle errors in this syntax
+await keyword tells javascript to pause execution till the promise get settles. ie. resolve or reject
+and when we want to use await keyword in a function we have to denote that function as async
+
+
+ECMAScript 2018.js
+
+1-
+ECMAScript 2018 finalizes the full implementation of the Promise object with Promise.finally
+Here there are 2 conditions.
+ 1 is promise will fullfill, and second is promise will reject
+ so if we write handler for finally, this will always get executed after resolve or reject
+
+2-
+ECMAScript 2018 added rest properties.
+This allows us to destruct an object and collect the leftovers onto a new object:
+Like in our example x has value 1, y has value 2 and remaining properties from given object will collect in z as object;
+
+Also the ECMAScript 2018 added 4 new regex features and asynchronuos for/of
+
+
+ECMAScript 2019.js
+
+1-
+trimStart() trim the whitespaces at the starting of the string and trimEnd() trim whitespaces at the end of the string
+
+2-
+ES2019 added the Object method fromEntries() to JavaScript.
+The fromEntries() method creates an object from key / value pairs.
+Here this myObj variable will contain an object having properties like
+apple, pears, bananas and its value will be 300, 900, 500 respectively
+
+3-
+Normally we write catch with barackets having error argument, 
+ECMAScript 2019 introduced optional catch if we dont cate about what the error is
+
+4-
+The flat() method creates a new array by flattening a nested array.
+Like here it gives us flat array from multidiamentional array
+
+5-
+The flatMap() method first maps all elements of an Array and then creates a new array by flattening the array.
+
+Also ECMAScript 2019 revised Array.Sort(), JSON.stringify() and Function.toString()
+
+
+ECMAScript 2020.js
+
+1-
+JavaScript BigInt variables are used to store big integer values 
+that are too big to be represented by a normal JavaScript Number.
+JavaScript integers are only accurate up to 15 digits.
+These are 2 ways to define bigint
+
+2-
+Nullish Coalescing Operator is useful if the first variable is null then return second variable and so on;
+here in our example text2 will get return because text is null
+
+3-
+The Optional Chaining Operator returns undefined if an object is undefined or null (instead of throwing an error).
+eg here we have car object. but even if car is null or undefined optional Chaining operator wont give error instead it will return undefined
+Please not this will only work if you check this in supported browser
+
+4-
+Promise.all() will reject immediately upon any of the input promises rejecting.
+But in case of Promise.allSettled(), it wait for every promise to fullfil or reject. and then returns array of settled promise values
