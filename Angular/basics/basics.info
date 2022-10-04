@@ -1,0 +1,126 @@
+1-
+Transpiling means code from a high level language gets converted to another high level language.
+Transpiling in angular is the process to convert the typescript into javascript.
+
+2-
+Interpolation refers to embedding expressions into marked up text. By default, interpolation uses the double curly braces {{ and }} as delimiters.
+
+3-
+In Angular, a module is a mechanism to group components, directives, pipes and services that are related, in such a way that can be combined with other modules to create an application.
+Module is a class which decorates using NgModule decorator. NgModule decorator takes an object which consists of imports, exports, declarations, bootstrap, providers.
+
+4- 
+Property binding - To bind to an element's property, enclose it in square brackets, [],
+
+5-
+Attribute binding syntax resembles property binding, but instead of an element property between brackets, you precede the name of the attribute with the prefix attr, followed by a dot.
+
+6-
+To bind to an event you use the Angular event binding syntax.
+This event binding syntax consists of a target event name within parentheses to the left of an equal sign, and a quoted template statement to the right.
+
+7-
+In Angular, a component's styles can be encapsulated within the component's host element so that they don't affect the rest of the application.
+The Component's decorator provides the encapsulation option which can be used to control how the encapsulation is applied on a per component basis.
+there are 3 modes ShadowDom, Emulated, and None. Emulated is default mode of style encapsulation.
+  1- ViewEncapsulation.ShadowDom - Angular uses the browser's built-in Shadow DOM API to enclose the component's view inside a ShadowRoot and apply the provided styles in an isolated manner
+  2- ViewEncapsulation.Emulated - Angular modifies the component's CSS selectors so that they are only applied to the component's view and do not affect other elements in the application
+  3- ViewEncapsulation.None - Angular does not apply any sort of view encapsulation meaning that any styles specified for the component are actually globally applied and can affect any HTML element in application
+
+8-
+Content projection is a pattern in which you insert, or project, the content you want to use inside another component.
+Here everything passed withing app-demo element will be projected in place of ng-content. This is also referes as Single Slot Projection
+
+9-
+Multislot content projection - A component can have multiple slots. Each slot can specify a CSS selector that determines which content goes into that slot.
+So here in our example
+question projects in question selector, heading 1 projects in h1 selector, and text projects in text class selector.
+
+10-
+Components are the most basic UI building block of an Angular app.
+An Angular app contains a tree of Angular components.
+Angular components are a subset of directives, and always associated with a template.
+Component decorator that marks a class as an Angular component and provides configuration metadata that determines how the component should be processed, instantiated, and used at runtime.
+
+11-
+A component instance has a lifecycle that starts when Angular instantiates the component class and renders the component view along with its child views.
+The lifecycle continues with change detection, as Angular checks to see when data-bound properties change, and updates both the view and the component instance as needed.
+The lifecycle ends when Angular destroys the component instance and removes its rendered template from the DOM.
+After your application instantiates a component or directive by calling its constructor, Angular calls the hook methods you have implemented at the appropriate point in the lifecycle of that instance.
+Angular executes hook methods in the following sequence. 1-ngOnChanges(), 2-ngOnInit() 3- ngDoCheck(), 4-ngAfterContentInit, 5-ngAfterContentChecked, 6-ngAfterViewInit, 7-ngAfterViewChecked, and 8-ngOnDestroy()
+  1 ngOnChanges()- Respond when Angular sets or resets data-bound input properties. The method receives a SimpleChanges object of current and previous property values.
+    - runs before ngOnInit() and whenever data bound properties changes
+  2- ngOnInit()- Initialize the component after Angular first displays the data-bound properties and sets the component's input properties.
+  3- ngDoCheck()- Detect and act upon changes that Angular can't or won't detect on its own.
+  4-ngAfterContentInit - Respond after Angular projects external content into the component's view
+  5-ngAfterContentChecked - Respond after Angular checks the content projected into the directive or component
+  6-ngAfterViewInit - Respond after Angular initializes the component's views and child views
+  7-ngAfterViewChecked - Respond after Angular checks the component's views and child views
+  8-ngOnDestroy() - Cleanup just before Angular destroys the directive or component.
+
+12-
+Directives are classes that add new behavior or modify the existing behavior to the elements in the template.
+Basically directives are used to manipulate the DOM, for example adding/removing the element from DOM or changing the appearance of the DOM elements.
+Different types of Angular directives are - Components, Attribute, Structural directives
+There are some built in directives like NgModel, NgClass, NgStyle. also structural directives like NgIf, NgFor, NgSwitch
+
+
+13-
+Creating our own directive- here we have created our own appHighlighter attribute directive
+Create a class and add @Directive decorator to it and pass the object which has selector property which is the name of directive
+To create an attribute directive we need to access the HTML element on which the directive is getting applied, for that we will inject ElementRef dependency using constructor in our class.
+
+14-
+@HostBinding and @HostListener are two decorators in Angular that can be really useful in custom directives.
+@HostBinding lets you set properties on the element or component that hosts the directive
+@HostListener lets you listen for events on the host element or component
+here in this example we have created color changed directive and used in paragraph element. So paragraph has initially red color and when user clicks on paragraph it will chnage to blue color
+here HostBinding decorator will assign style attribute to given element with color red.
+and @HostListener listens click event of given element and executes handle which result in chnaging color to blue
+
+15-
+Pipes are used to transform strings, currency amounts, dates, and other data for display.
+Pipes are simple functions to use in template expressions to accept an input value and return a transformed value.
+eg. here we have used uppercase pipe, this transforms small my name string to capital my name.
+Angular has some built in pipes eg. date uppercase, lowercase,
+We can pass arguments to pipes using colon, and if we have multiple arguments to pass we saperate them by colon as well.
+like here we have passed multiple arguments to date pipe format and timezone
+we can use multiple pipes to single value like here we have used date and uppercase pipe
+
+16-
+The async pipe subscribes to an Observable or Promise and returns the latest value it has emitted.
+When a new value is emitted, the async pipe marks that component to be checked for changes
+When the component gets destroyed, the async pipe unsubscribes automatically to avoid potential memory leaks
+Here in example we have subscribed to message observable, when obsevable emits new value renders on page
+
+17-
+Pure pipes in angular are the pipes that execute when it detects a pure change in the input value.
+Pure change means change in either primitive value such as String, Number, Boolean, or Symbol or change in object reference.
+So here in this example age pipe return age from user object, but if user's age is change, pipe will not transform new age value, because the reference of object is not chnaged here
+to make this correct we need to make pipe impure like make pure: false;
+By default pipes are pure, to make it impure, we need to set pure propery to false in Pipe decorator.
+
+18-
+DI is wired into the Angular framework and allows classes to configure dependencies that they need.
+DI works with those classes which are decorated, such as Components, Directives, Pipes, and Injectables.
+There are 2 main role in DI pattern: dependency consumer and dependency provider;
+Here we have created this HeroService as a dependency by decorating the class by @Injectable() decorator
+And we will make it available to consume in specific part of application by adding that dependency in provides array of Module Or Component decorator
+Eg. here we have exaple of Module and Component or we can provide it for whole application by adding providerIn property in @Injectable() decoratior
+And here we have consumed our dependancy in a component
+Whene we add dependancy in providers array, angular creates new copy of dependancy and that copy available to consume all classes of the module
+
+19-
+The components and templates provided by Angular cannot be understood by the browser directly, Angular applications require a compilation process before they can run in a browser.
+AOT converts your Angular HTML and TypeScript code into efficient JavaScript code during the build phase before the browser downloads and runs that code
+Just in time compiler compiles each file separately and it’s mostly compiled in the browser
+AOT happens in 3 phase 1-code analysis 2-code generation 3-template type checking
+AOT- compilation only happens once JIT-on each request
+AOT-Loading in AOT is much quicker than the JIT JIT-Loading in JIT is slower than the AOT 
+AOT-suitable for production mode JIT- suitable for development mode
+AOT- You can catch template binding error at build time JIT-You can catch template binding error at display time
+
+20-
+Change detection is the process through which Angular checks to see whether your application state has changed, and if any DOM needs to be updated.
+At a high level, Angular walks your components from top to bottom, looking for changes.
+
