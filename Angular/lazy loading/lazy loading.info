@@ -1,0 +1,12 @@
+Intro-
+You can configure your routes to lazy load modules, which means that Angular only loads modules as needed, rather than loading all modules when the application launches.
+Lazy loading helps keep initial bundle sizes smaller, which in turn helps decrease load times
+Now we are going to see how to configure lazily loaded modules in Routes
+
+
+Conclude
+forRoot() and forChild() methods. 
+To configure routes in root module angular uses forRoot() method
+And To configure routes in feature module angular uses forChild() method which takes routes array as argument
+As Angular application has one root module and a number of featuremodule. 
+In same way in angular application forRoot() method can be use only once, and forChild() can be used many times as we need

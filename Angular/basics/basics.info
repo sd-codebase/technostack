@@ -121,6 +121,11 @@ AOT-suitable for production mode JIT- suitable for development mode
 AOT- You can catch template binding error at build time JIT-You can catch template binding error at display time
 
 20-
-Change detection is the process through which Angular checks to see whether your application state has changed, and if any DOM needs to be updated.
-At a high level, Angular walks your components from top to bottom, looking for changes.
+Change detection mechanism detects data changesin application and re-renders view.This way angular makes sure that the component and view always in sync.
+Changes occur on different occasions from different events. such as keyboard events, mouse events, javascript functions, network requests.
+Angular provides own change detector to each component, The change detector reads the binding on a template, and reflects the updated data to the view.
+Angular performs change detection on all components from top to bottom whenever something triggers a change in your app.
+There are two Angular change detections strategies- 1. Default, 2. OnPush
+When we use Default strategy, change detection runs on any change in any model property, Angular will run change detection traversing a component tree to update the DOM
+When we use OnPush strategy, change detection runs only when a new reference for object or new value for primitives is being passed to the component.
 
