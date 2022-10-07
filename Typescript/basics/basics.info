@@ -1,0 +1,58 @@
+1-
+To declare variable we include a colon (:) after the variable name, followed by its type.
+As we see here we have declared a variable name myName, which has type string.
+We can assign value to variable in same line and in this we dont need type of variable, typescript automatically assign type of value which is string in our case.
+This is also called type inference.
+
+2-
+Types in typescript
+There are lots of types in typescript we will go through some of commonly used types
+  The primitives: string, number, and boolean;
+  Arrays
+  any
+  Functions: Parameter type annotation, Return Type Annotations
+  Union Types
+  Type Aliases
+  Interfaces
+  Type Assertions
+  Enums
+  Thre is null and undefined also
+
+3-
+Type aliases create a new name for a type. Aliasing doesn't actually create a new type - it creates a new name to refer to that type
+Here we have created one alias for type number i.e. Second. And then we can use it as a type.
+
+4-
+An interface is a syntactical contract that an entity should conform to. Means an interface defines the syntax that any entity must adapt, entity should have those properties with defined types.
+Here we have defined an interface IPerson, which is having 2 properties and one method.
+
+5-
+Interfaces are basically a way to describe data shapes of object.
+Type is a definition of a type of data, for example, a union, primitive, intersection, tuple, or any other type
+we can easily extend and implement interfaces. This is not possible with types.
+
+6-
+Enums allow a developer to define a set of named constants
+Using enums can create a set of distinct cases.
+Eg. here we have an enum name Directions
+
+7-
+Union- When we expect one of the given type of variable we use union.
+We denote union using pipe symbol. Here we can see in this example.
+
+8-
+Intersection- Wnen we expect all of the types for variable we use Intersection
+We denote intersection using & symbol. Here we can see in this example.
+In this way we expect Person type object will have fName, lName, and address properties;
+
+
+9-
+A class is a blueprint for creating objects. A class encapsulates data for the object.
+We can create many instances from a class.
+Here we have created Person class by using class keyword, and we have created object from it by using new keyword.
+
+10-
+ES6 includes static members and so does TypeScript. The static members of a class are accessed using the class name and dot notation, without creating an object.
+Here in this example we accessed pi property and calculare Area method of class without creating object.
+
+
