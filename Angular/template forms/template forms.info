@@ -1,6 +1,8 @@
 Intro-
 We can create any kind of form using template-driven form in angular
-Template-driven forms use two-way data binding to update the data model in component as we update data in template or vice a versa i.e view will get updated if we update data in component
+Template-driven forms use two-way data binding to update
+ the data model in component as we update data in template or vice a versa
+ i.e view will get updated if we update data in component
 we use ngModel for two way data binding.
 
 Here we will see template driven form in 3 steps
@@ -8,15 +10,21 @@ Here we will see template driven form in 3 steps
 2- validate data 
 3- fetch updated data through forms
 
-First we need to import FormsModule in out NgModule, as we can see here we have imported FormsModule
-Then we have created data model in our component i.e. model property. Which consists of fname and lname
-And we have form submission handler i.e onSubmit method, which will log data updated through our template form
+First we need to import FormsModule in out NgModule,
+ as we can see here we have imported FormsModule
+Then we have created data model in our component
+ i.e. model property. Which consists of fname and lname
+And we have form submission handler i.e onSubmit method,
+ which will log data updated through our template form
 
 Then we come to important part of template driven form is template itself
 Here we have created form with one submit event and one reference to our form i.e myForm
 We have added 2 input field for first name and last name
-Both are required field, we have bind data using ngModel. and we have references for each form control i.e. fname and lname
-We have added validation errormessage for each field, it will be visible if the respective field is invalid. means it hide if field is valid or not yet updated i.e pristine
+Both are required field, we have bind data using ngModel.
+ and we have references for each form control i.e. fname and lname
+We have added validation errormessage for each field,
+ it will be visible if the respective field is invalid.
+  means it hide if field is valid or not yet updated i.e pristine
 We have added one sumbit button, and made it disabled if form is invalid
 
 After valid form sumbission we have logged data in our component.

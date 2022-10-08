@@ -8,7 +8,8 @@ ts
 @ViewChild("header") headerEl: ElementRef;
 
 ngAfterViewInit() {
-    console.log(this.jokeViewChild, this.taskViewChildren, this.headerEl) // this will log jokeViewChild element, taskViewChildren elements and headerEl element
+    console.log(this.jokeViewChild, this.taskViewChildren, this.headerEl) 
+    // this will log jokeViewChild element, taskViewChildren elements and headerEl element
 }
 
 html
@@ -37,5 +38,6 @@ Demo.ts
 @ContentChild("header") headerEl: ElementRef;
 
 ngAfterContentInit() {
-    console.log(this.jokeContentChild, this.taskContentChildren, this.headerEl) // this will log jokeContentChild element, taskContentChildren elements and headerEl element
+    console.log(this.jokeContentChild, this.taskContentChildren, this.headerEl) 
+    // this will log jokeContentChild element, taskContentChildren elements and headerEl element
 }

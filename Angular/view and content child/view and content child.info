@@ -1,20 +1,33 @@
 Intro-
 An Angular application is composed of a number of components nested together.
-These components can be nested in two ways: as view children, in the template of their component; or as content children, via content projection from a host component.
-As developers, we can get access to these child components via the @ViewChild and @ContentChild or @ViewChildren and @ContentChildren decorators.
+These components can be nested in two ways:
+ as view children, in the template of their component;
+ or as content children, via content projection from a host component.
+As developers, we can get access to these child components
+ via the @ViewChild and @ContentChild or @ViewChildren and @ContentChildren decorators.
 This also called template querying mechanism
 
 1-
-View child or View children of a component are the components and elements in this component’s view.
-here if you can see We are storing a reference to the child JokeComponent in a property called jokeViewChild.
-And here We use the @ViewChildren decorator which matches all TaskComponent`s and stores them in a `QueryList called taskViewChildren.
-Also we can store reference of any element using ViewChild, as we see here we have stored header element reference in headerEl property.
-This view children get initialized by the time ngAfterViewInit() lifecycle method executes, we can acces view children in ngAfterViewInit method
+View child or View children of a component are the components
+ and elements in this component’s view.
+Here if you can see We are storing a reference to the child JokeComponent
+ in a property called jokeViewChild.
+And here We use the @ViewChildren decorator which matches all TaskComponent`s
+ and stores them in a `QueryList called taskViewChildren.
+Also we can store reference of any element using ViewChild,
+ as we see here we have stored header element reference in headerEl property.
+This view children get initialized by the time ngAfterViewInit()
+ lifecycle method executes, we can acces view children in ngAfterViewInit method
 
 2-
-Content child or Content children of a component are the components and elements that are projected into this component’s view by a host component.
+Content child or Content children of a component
+ are the components and elements that are projected into this component’s view by a host component.
 Here we can see Hostcomponent has projected 4 children in out Democomponent
-here if you can see in Demo.ts We are storing a reference to the content child JokeComponent in a property called jokeContentChild.
-And here We use the @ContentChildren decorator which matches all TaskComponent`s and stores them in a `QueryList called taskContentChildren.
-Also we can store reference of any element using ContentChild, as we see here we have stored header content element reference in headerEl property.
-This content children get initialized by the time ngAfterContentInit() lifecycle method executes, we can acces content children in ngAfterContentInit method
+Here if you can see in Demo.ts We are storing
+ a reference to the content child JokeComponent in a property called jokeContentChild.
+And here We use the @ContentChildren decorator
+ which matches all TaskComponent`s and stores them in a `QueryList called taskContentChildren.
+Also we can store reference of any element using ContentChild,
+ as we see here we have stored header content element reference in headerEl property.
+This content children get initialized by the time ngAfterContentInit()
+ lifecycle method executes, we can acces content children in ngAfterContentInit method
