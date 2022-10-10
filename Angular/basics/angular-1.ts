@@ -244,5 +244,25 @@ in tsconfig.json
 
 
 // Improve performance of angular app
-// How to secure angular application
+A few popular methods or techniques help us optimize the application better.
+1. Using AoT Compilation
+2. Using OnPush Change Detection Strategy
+3. Using Pure Pipes
+4. Unsubscribe from Observables
+5. Lazy Loading
+6. Use trackBy option for For Loop
+7. Avoid computation in template files
+8. Usage of Web Workers
 
+// How to secure angular application
+1- Prevent an application from Cross-Site Scripting (XSS)
+2- Use Route guards when required
+3- Implement CSP
+4- Do not use DOM’s APIs directly
+5- Prevent CSRF
+6- Prevent Cross-Site Script Inclusion
+7- Up-to-date Angular Libraries
+8- Avoid Modifying the Angular Copy
+9- Use Offline Template Compiler
+10- Validate user-submitted data on server-side code
+11- Do not use components with Known Vulnerabilities
