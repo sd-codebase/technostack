@@ -31,7 +31,8 @@ animatable means that propertie's value can be changes after given time.
 5 - Add these animation triggers to elements
   <div [@triggerName]="expression"></div>;
 
-6 - Write code for each triggers i.e. what will be the different states in that trigger
+6 - Write code for each triggers i.e. what will be the different states
+ in that trigger
   state('open', style({ // when going in open state
     height: '200px',
     opacity: 1,

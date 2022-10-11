@@ -1,7 +1,8 @@
-// Router Guards
-With Router Guards we can prevent users from accessing area that they’re not allowed to access,
+// Route Guards
+With Route Guards we can prevent users from accessing area
+ that they’re not allowed to access,
  or, we can ask them for confirmation when leaving a certain area.
-There are four different types of Router Guards
+There are 5 different types of Router Guards
 CanActivate- Checks to see if a user can visit a route.
 CanActivateChild- Checks to see if a user can visit a routes children.
 CanDeactivate- Checks to see if a user can exit a route.
@@ -50,7 +51,8 @@ We can implement this guard in similar way i.e.
   }
 
 3- CanDeactivate
-Usually used to warn people if they are navigating away from a page where they have some unsaved changes.
+Usually used to warn people if they are navigating away from a page
+ where they have some unsaved changes.
 - Create method in component
   canDeactivate() {
     // Check if everything is settled and there is no changes are pending
@@ -59,8 +61,8 @@ Usually used to warn people if they are navigating away from a page where they h
 - Create a CanDeactivate guard
   class UnsearchedTermGuard implements CanDeactivate<SearchComponent> {
     canDeactivate(component: SearchComponent,
-                  route: ActivatedRouteSnapshot,
-                  state: RouterStateSnapshot): boolean {
+                  activatedRouteSnapshot: ActivatedRouteSnapshot,
+                  routerStateSnapshot: RouterStateSnapshot): boolean {
       return component.canDeactivate() || window.confirm("Are you sure?");
     }
   }
@@ -75,7 +77,8 @@ Usually used to warn people if they are navigating away from a page where they h
   }
 
 4- CanLoad
-We can implement this guard in similar way to CanActivate or CanActivateChild i.e.
+We can implement this guard in similar way
+ to CanActivate or CanActivateChild
 - Write a guard as Service
   @Injectable()
   class AlwaysAuthGuard implements CanLoad {

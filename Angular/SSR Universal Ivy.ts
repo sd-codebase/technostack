@@ -1,7 +1,9 @@
 SSR
 Server side rendering
-SSR generates the full html for a page on server, and then is serves to client in reponse to Navigation
-It avoids additional request for initial data fetching and templating, since it handle before browser gets response
+SSR generates the full html for a page on server,
+ and then is serves to client, in reponse to Navigation
+It avoids additional request for initial data fetching and templating,
+ since it handle before browser gets response
 
 Pros
 - Initial page load is faster
@@ -18,7 +20,7 @@ Cons
 
 Angular Universal
 Angular Universal is technology that renders angular app server side
-Where the normal SPA ececutes in browser, angular universal executes on server,
+Where the normal SPA executes in browser, angular universal executes on server,
  generates static application pages, that later gets bootstraped in browser
 App renders fast, user can see layout of page before it gets fully interactive
 We can easily prepare angular application for server side rendering using cli
@@ -39,8 +41,8 @@ This made huge improvements in angular aaplication
 Ivy can compile components more independantly with each others
 Locality and Tree Shaking are two key aspects that Ivy considered
 1 - Locality
-This is the processof compiling each component independantly
- with its own loacl information that rebuilds faster
+This is the process of compiling each component independantly
+ with its own local information that rebuilds faster
  by compiling partial changes and not the entire project files.
 This increases build speed
 2 - Tree Shaking
@@ -53,12 +55,17 @@ Features of Ivy
 entrycomponents is deprecated and will be removed in feature versions of angular
 With Ivy any component can be lazily loaded and dynamically rendered
 2 - Improvements to differential loading
-Differential loading means build an application for lower version of javascript and then build for heigher versions.
+Differential loading means build an application
+ for lower version of javascript and then build for heigher versions.
 Angular applications first builds for es5 and then es6 or ES2015.
-But now using Ivy, angular application builds first for ES2015 and then same bundle uses to tranpile into es5.
-This way second time angular don't build application it just transpile builds to lower version
+But now using Ivy, angular application builds first for ES2015
+ and then same bundle uses to tranpile into es5.
+This way second time angular don't build application,
+ instead it just transpile builds to lower version
 3 - AOT compilation every where
 AOT enabled by default in builds, dev server and test builds also
+
+
 
 Make ivy enabled in existed project
 In tsconfig.app.json

@@ -6,7 +6,9 @@ Angular 14 Features
   - Standalone component has the flag "standalone" we need to set the value true
   - Not Required to add the standalone component in ngModule
   - We can import the required modules in the component itself
-  - To generate standalone component use flag --standalone, while generating component
+  - To generate standalone component use flag --standalone,
+   while generating component
+
   // Eg
   @Component({
     selector: 'app-standalonedemo',
@@ -20,7 +22,8 @@ Angular 14 Features
 2. Typed Forms
   This is only for reactive Forms
   For using this feature tsconig.js should be in strict mode
-  Typed forms ensure that the values inside of form control, groups and array are type safe
+  Typed forms ensure that the values inside of
+   form control, groups and array are type safe
   still we can use the untyped version of forms
   // Eg
   contactForm = new FormGroup({
@@ -69,7 +72,8 @@ Angular 14 Features
     }
 
 4. Extended developer diagnostics
-  If user make istake while typing ng commands, cli will suggest corrct command options
+  If user make mistake while typing ng commands,
+   cli will suggest correct command options
   eg. if user type ng sevre, then cli will suggest you correct command
 
 5. Bind to protected component members
@@ -85,7 +89,8 @@ Angular 14 Features
 
 6. Optional Injectors in Embedded Views
   v14 adds support for passing in an optional injector when
-   creating an embedded view through ViewContainerRef.createEmbeddedView and TemplateRef.createEmbeddedView.
+   creating an embedded view through
+   ViewContainerRef.createEmbeddedView and TemplateRef.createEmbeddedView.
   // Eg
   viewContainer.createEmbeddedView(templateRef, context, {
     injector: injector,

@@ -1,9 +1,13 @@
 Web components
-Web components enable developers to create custom and reusable HTML tags that can be used in web apps just like standard HTML tags.
-Angular provides the elements package which helps export Angular components as web components.
+Web components help developers to create
+ custom and reusable HTML tags that can be used in web apps
+ just like standard HTML tags.
+Angular provides the elements package which helps export Angular components
+ as web components.
 Web components are based on four technologies:
 1 - Custom Elements: are another name for web components.
-2 - Shadow DOM: This will allow you to create custom elements which are isolated from the rest of the HTML document.
+2 - Shadow DOM: This will allow you to create custom elements
+ which are isolated from the rest of the HTML document.
 3 - ES Modules
 4 - HTML Templates
 

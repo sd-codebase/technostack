@@ -1,7 +1,8 @@
 Custom form controls
 We can build our own custom form control that works with the Reactive Forms API.
 
-1 - ControlValueAccessor - is an interface working as a mediator b/w a FormControl and the native element
+1 - ControlValueAccessor - is an interface working as a mediator
+ b/w a FormControl and the native element
   export class TextInputComponent implements ControlValueAccessor{ }
   
 It has 4 methods to override in implementaation class
@@ -9,19 +10,22 @@ It has 4 methods to override in implementaation class
   writeValue(obj: string) {
     this.value = obj;
   }
-3- registerOnChange- registerOnChange is a method to propagate native control value to form control value
+3- registerOnChange- registerOnChange is a method to
+ propagate native control value to form control value
   onChange = (string) => {};
 
   registerOnChange(onChange: any) {
     this.onChange = onChange;
   }
-4- registerOnTouched -  child control can report its touched status back to the parent form via this method
+4- registerOnTouched -  child control can report its touched status
+ back to the parent form via this method
   onTouched = (string) => {};
 
   registerOnTouched(onTouched: any) {
     this.onTouched = onTouched;
   }
-5- setDisabledState - we must also notify the parent form when child control was set disabled
+5- setDisabledState - we must also notify the parent form
+ when child control was set disabled
   disabled: boolean = false;
   SetDisabledState(disabled: boolean) {
     this.disabled = disabled;

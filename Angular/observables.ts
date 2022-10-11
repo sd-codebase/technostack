@@ -1,8 +1,12 @@
 Observables
-Angular uses observables as an interface to handle a variety of common asynchronous operations.
-For example: The HTTP module uses observables to handle AJAX requests and responses.
- The Router and Forms modules use observables to listen for and respond to user-input events.
-Observable provides support for delivering messages between different parts of your single-page application.
+Angular uses observables as an interface to handle
+ a variety of common asynchronous operations.
+For example: The HTTP module uses observables
+ to handle AJAX requests and responses.
+The Router and Forms modules use observables
+ to listen for and respond to user-input events.
+Observable provides support for delivering messages
+ between different parts of your single-page application.
  using subscribe() and next().
 
 // Create Observables
@@ -48,7 +52,8 @@ Observables are two types: Observable and Subject.
 
 Observables are unicast, i.e. we cannot send value to Observables,
  we just can get values from them by subscribing them;
-But Subjects are multicast, i.e. we can send value to Subjects using next() function
+But Subjects are multicast, i.e. we can send value to Subjects
+ using next() function
  and recieve values from subject by subscribing them.
 
 Subject
@@ -76,7 +81,8 @@ Subject
 Subject has 3 types: BehaviourSubject, ReplaySubject, AsyncSubject
 BehaviorSubject
     The BehaviorSubject has the characteristic that it stores the “current” value. 
-    This means when you subscribe to BehaviorSubject you directly get the last emitted value from the BehaviorSubject.
+    This means when you subscribe to BehaviorSubject
+     you directly get the last emitted value from the BehaviorSubject.
     // Eg
         const subject = new Rx.BehaviorSubject();
 
@@ -108,11 +114,16 @@ BehaviorSubject
 
 ReplaySubject
     ReplaySubject behaves the same as BehaviorSubject.
-    It has one additional characteristic i.e. it can store multiple last values emmitted by ReplaySubject
-    While creating ReplaySubject, we tell to ReplaySubject that these much last values you should remember
-    eg. const subject = new ReplaySubject(2); // this. will remember last 2 emitted values.
-    Also there is provision to tell subject that for this much time you should remember last values
-    eg. const subject = new ReplaySubject(5, 200); // this. will remember last 5 emitted values for 200 ms.
+    It has one additional characteristic i.e. it can store
+     multiple last values emmitted by ReplaySubject
+    While creating ReplaySubject, we tell to ReplaySubject
+     that these many last values you should record
+    eg. const subject = new ReplaySubject(2); 
+    // this. will remember last 2 emitted values.
+    Also there is provision to tell subject that
+     for how much time you should record last values
+    eg. const subject = new ReplaySubject(5, 200); 
+    // this. will remember last 5 emitted values for 200 ms.
     // Eg
         const subject = new Rx.ReplaySubject(2);
 
@@ -143,7 +154,7 @@ ReplaySubject
 AsyncSubject
 The AsyncSubject is a Subject variant
  where only the last value of the Observable execution is sent to its subscribers,
- and only when the execution completes.
+ and that too only when the execution completes.
     // Eg
     const subject = new Rx.AsyncSubject();
 
