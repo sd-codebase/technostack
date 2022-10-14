@@ -1,0 +1,726 @@
+Why to test an application?
+Testing your Angular application helps you check that your app is working as you expect.
+
+
+
+Why Automation testing
+Manually repeating these tests is costly and time consuming.
+Once created, automated tests can be run over and over again
+ at no additional cost and they are much faster than manual tests.
+
+
+
+Unit and integration testing Angular
+Unit- Isolate the code in order to examine it, eg. component or service
+Integration- Test view and component together.
+
+
+
+Testing tools
+Jasmine as testing framework
+Karma as test runner
+Test code is bundled with Webpack
+Part of application tested inside Angular’s TestBed
+
+
+
+Test suite
+A test consists of one or more suites.
+A suite is declared with a describe block.
+  describe('Suite description', () => {
+    /* … */
+  });
+
+
+
+Specifications or specs
+Each suit consists of one or more specifications or specs
+Each .spec.ts file represents specs.
+A spec is declared with an it block:
+  describe('Suite description', () => {
+    it('Spec description', () => {
+      /* … */
+    });
+    /* … more specs …  */
+  });
+
+
+
+Structure of a test
+testing code typically consists of three phases
+Arrange, Act and Assert.
+1. Arrange is the preparation and setup phase.
+2. Act is the phase where interaction with the code under test happens
+3. Assert is the phase where the code behavior is checked and verified
+
+
+
+beforeEach(), beforeAll(), afterEach(), afterAll()
+These are a global functions in Jasmine that runs before and after some code;
+beforeEach -  before each spec in the test suite
+beforeAll -  before all specs in the test suite
+afterEach -  after each spec in the test suite
+afterAll -  after all specs in the test suite
+
+
+
+
+Expectations
+In the Assert phase, the test compares the actual output or return value to the expected output or return value
+  expect(actualValue).toBe(expectedValue);
+
+
+Matchers
+  toBe(), toEqual()
+
+
+
+Test focus
+1. run only this test suite and skip all others: use fdescribe()
+2.  run only one spec: use fit()
+
+
+
+
+TestBed
+The TestBed creates and configures an Angular environment
+
+
+
+
+Configuring the testing Module
+The TestBed comes with a testing Module that is configured like normal Modules in your application: You can declare Components, Directives and Pipes, provide Services and other Injectables as well as import other Modules.
+  TestBed.configureTestingModule({
+    imports: [],
+    declarations: [],
+    providers: [],
+  });
+
+
+
+Our Component under test is now part of a Module. 
+First we need to compile all declared Components, Directives and Pipes
+  TestBed.compileComponents();
+
+
+
+Since configureTestingModule returns the TestBed again, we can chain those two calls
+  TestBed.configureTestingModules().compileComponents();
+
+
+
+
+Rendering the Component
+Now we have a fully-configured testing Module with compiled Components.
+  const fixture = TestBed.createComponent(OurComponent);
+createComponent() returns ComponentFixture, means a wrapper around the component with useful testing tools.
+createComponent renders the Component into a div container element in the HTML DOM
+
+
+
+As angular environment we don't have automatic change detection so we need to do change detection to keey view and component in sync
+  fixture.detectChanges();
+
+
+
+Summary till now
+describe('test purpose', () => {
+  let fixture: ComponentFixture<OurComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [OurComponent],
+    }).compileComponents();
+    fixture = TesBed.createComponent();
+    fixture.detectChanges();
+  });
+
+  it(() => {});
+})
+
+
+
+Jasmine expects that your testing code is synchronous
+but also beforeEach, beforeAll, afterEach, afterAll need to finish in a certain amount of time
+So jasmine also supports asynchronous specs, so we can use async await for before and after functions
+
+
+
+ComponentFixture holds, component and rendered DOM
+For Unit testing we dont need rendered dom, so we will get only component instance, from fixture using componentInstance
+  const component = fisture.componentInstance;
+
+
+
+Set Input
+  component.startCount = 10;
+
+
+
+Subscribe to Output
+  component.countChange.subscribe((count) => {
+    /* … */
+  });
+
+
+
+accessing elements in the DOM, Angular has another abstraction
+The DebugElement wraps the native DOM element
+The fixture’s debugElement property returns the Component’s host element
+  const debugElement = fixture.debugElement;
+
+
+
+
+to access the native DOM element we use nativeElement 
+  const { debugElement } = fixture;
+  const { nativeElement } = debugElement; // access nativeElement
+  console.log(nativeElement.tagName); // Access tagName
+  console.log(nativeElement.textContent); // Access innerText
+  console.log(nativeElement.innerHTML); // access innerHtml
+
+
+
+
+Write spec
+  it('increments the count', () => {
+    /* … */
+  });
+
+
+
+Find all element from component dom by data-testid
+const allH1 = debugElement.queryAll(By.css('[data-testid="h1"]'));
+
+Find first element from component dom by data-testId
+  const button = debugElement.query(ByTestId('myButton')); //we have created ByTestId(testId: string);
+
+Triggering event handlers
+  button.triggerEventHandler('click', {
+    // Event properties
+  });
+  button.triggerEventHandler('click', null);
+  button.triggerEventHandler('click', { target: button.nativeElement });
+
+After interaction with component, we have to re-render DOM to sync changes of component
+  fixture.detectChanges();
+
+
+
+Get textcontent and assert after clicking on button
+  // Consider template
+  <p data-testid = "counter">{{counter}}</p>
+  const counter = debugElement.query(ByTestId('counter'));
+  expect(counter.nativeElement.textContent).toBe('1');
+
+
+
+Helper to find element in debugElement i.e. Reusable function to find element by testid
+  function findEl<T>(
+    fixture: ComponentFixture<T>,
+    testId: string
+  ): DebugElement {
+    return fixture.debugElement.query(
+      By.css(`[data-testid="${testId}"]`)
+    );
+  }
+
+Now we can get element as follows
+  const counter = findEl(fixture, 'counter');
+
+
+
+In the testing environment, ngOnChanges is not called automatically, we have to call it manually
+
+
+
+
+Test
+Component
+Nested Component
+Directive
+Pipes
+Service
+Spy
+Observable
+Promises
+Http calls
+Components with services
+<!-- Forms- template and reactive -->
+
+
+
+Test a Component
+
+// Component
+@Component({
+  selector: 'app-counter'
+  template: `
+    <button data-testid="decrement-button" (click)="onCounterChange.emit(--counter)">-</button>
+      <span data-testid="counter">{{counter}}</span>
+    <button data-testid="increment-button" (click)="onCounterChange.emit(++counter)">+</button>
+  `,
+})
+export class CounterComponent {
+  @Input() counter: number;
+
+  @Output() onCounterChange = new EventEmitter<number>();
+}
+
+// Spec
+describe(() => {
+  let fixture = ComponentFixture<CounterComponent>;
+
+  beforeEach(async () => {
+    await TestBed
+      .configureTestingModule({
+        declarations: [CounterComponent],
+      })
+      .compileComponents();
+    fixture = TestBed.createComponent(CounterComponent);
+    fixture.detectChanges();
+  });
+
+  it('Counter should increase', () => {
+    const {debugElement, componentInstance: component} = fixture;
+    
+    expect(debugElement).toBeTruthy();
+
+    const counter = findEl(debugElement, 'counter');
+    const incrementButton = findEl(debugElement, 'increment-button');
+    
+    const counter = findEl(debugElement, 'counter');
+    const decrementButton = findEl(debugElement, 'decrement-button');
+    
+    component.counter = 5;
+    fixture.detectChanges();
+
+    expect(counter.nativeElement.textContent).toBe('5');
+
+    decrementButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    expect(counter.nativeElement.textContent).toBe('6');
+
+    decrementButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    expect(counter.nativeElement.textContent).toBe('7');
+  })
+
+  it('Counter should descrease', () => {
+    const {debugElement, componentInstance: component} = fixture;
+    
+    expect(debugElement).toBeTruthy();
+
+    const counter = findEl(debugElement, 'counter');
+    const decrementButton = findEl(debugElement, 'decrement-button');
+    
+    component.counter = 5;
+    fixture.detectChanges();
+
+    expect(counter.nativeElement.textContent).toBe('5');
+
+    decrementButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    expect(counter.nativeElement.textContent).toBe('4');
+
+    decrementButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    expect(counter.nativeElement.textContent).toBe('3');
+  })
+
+});
+
+
+
+Test Nested Components
+
+// Child Component
+@Component({
+  selector: 'app-counter'
+  template: `
+    <button data-testid="decrement-button" (click)="onCounterChange.emit(--counter)">-</button>
+      <span data-testid="child-counter">{{counter}}</span>
+    <button data-testid="increment-button" (click)="onCounterChange.emit(++counter)">+</button>
+  `,
+})
+export class CounterComponent {
+  @Input() counter: number;
+
+  @Output() onCounterChange = new EventEmitter<number>();
+}
+
+// Parent Component
+@Component({
+  selector: 'app-home'
+  template: `
+    <span data-testid="parent-counter">{{counter}}</span>
+    <app-counter data-testid="counter-component" [counter]="counter" (onCounterChange)="handleCounterChange($event)"/>
+  `,
+})
+export class HomeComponent {
+  counter = 10;
+
+  handleCounterChange(counter) {
+    this.counter = counter;
+  }
+}
+
+// Spec
+
+describe(() => {
+  let fixture: ComponentFixture<HomeComponent>;
+  beforeEach(async () => {
+    await TestBed
+      .confugureTestingModule({
+        declarations: [HomeComponent, CounterComponent],
+      })
+      .compileComponents();
+
+    fixture = TestBed.createComponent(HomeComponent);
+    fixture.detectChanges();
+  });
+
+  it('Should render parent and child component', () => {
+    const {debugElement, componentInstance: component} = fixture;
+
+    expect(debugElement).toBeTruthy();
+    expect(findEl('counter-component')).toBeTruthy();
+  });
+
+  it('Should change counter if increased', () => {
+    const {debugElement, componentInstance: component} = fixture;
+
+    expect(debugElement).toBeTruthy();
+    expect(findEl('counter-component')).toBeTruthy();
+
+    const increaseButton = findEl('increment-button');
+    const childCounter = findEl('counter');
+
+    expect(childCounter.nativeElement.textContent).toBe('10');
+
+    increaseButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    expect(childCounter.nativeElement.textContent).toBe('11');
+    expect(component.couter).toBe(11);
+
+    increaseButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    expect(childCounter.nativeElement.textContent).toBe('12');
+    expect(component.couter).toBe(12);
+
+  });
+
+  it('Should change counter if decreased', () => {
+    const {debugElement, componentInstance: component} = fixture;
+
+    expect(debugElement).toBeTruthy();
+    expect(findEl('counter-component')).toBeTruthy();
+
+    const decreaseButton = findEl('decrement-button');
+    const childCounter = findEl('counter');
+
+    expect(childCounter.nativeElement.textContent).toBe('10');
+
+    decreaseButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    expect(childCounter.nativeElement.textContent).toBe('9');
+    expect(component.couter).toBe(9);
+
+    decreaseButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+
+    expect(childCounter.nativeElement.textContent).toBe('8');
+    expect(component.couter).toBe(8);
+
+  });
+});
+
+
+
+
+Test Directive and Pipe
+// Directive
+@Directive({
+    selector: '[appHighlight]'
+})
+export class HighlightDirective {
+    constructor(private eleRef: ElementRef) {
+      eleRef.nativeElement.style.background = 'red';
+    }
+}
+
+// Pipe
+@Pipe({name: 'textTransform'})
+export class TextTransform implements PipeTransform {
+  transform(value: string): string {
+    return `transformed ${value}`;
+  }
+}
+
+// Test Component
+@Component({
+  selector: 'app-test'
+  template: `
+    <p appHighlight data-testid="directive-host">Highlighted content</p>
+    <p data-testid="pipe-host">{{'text' | textTransform}}</p>
+  `,
+})
+export class TestComponent {}
+
+// Spec
+describe(() => {
+  let fixture =  ComponentFixture<TestComponent>;
+
+  beforeEach(async () => {
+    await TestBed
+      .configureTestingModule({
+        declarations: [TestComponent, TextTransform, HighlightDirective]
+      })
+      .compileComponents();
+    fixture = TestBed.createComponent(TestComponent);
+    fixture.detectChanges();
+  });
+
+  it('Should render directive and pipe', () => {
+    const {debugElement, componentInstance: component} = fixture;
+
+    const directiveHost = findEl(debugElement, 'directive-host');
+    const pipeHost = findEl(debugElement, 'pipe-host');
+
+    expect(directiveHost.nativeElement.style.background).toBe('red');
+    expect(pipeHost.nativeElement.textContent).toBe('transformed text');
+  });
+
+});
+
+
+
+
+
+Test Service
+
+@Injectable()
+export class DataService {
+  public endpoint = 'some valid url';
+}
+
+// Spec
+describe(() => {
+  let service: DataService;
+
+  beforeEach(async () => {
+    service = await TestBed.get(DataService);
+  });
+
+  it('Should get endpoint', () => {
+    expect(service.endpoint).toBe('some valid url');
+  })
+})
+
+
+
+
+
+Test Service with dependancy
+
+Consider from service1.fromServiceOne() returns value 5
+@Injectable()
+export class DataService {
+  public endpoint = 'some valid url';
+  constructor(private serviceOne: ServiceOne) {}
+
+  getFromOwn() {
+    return endpoint; 
+  }
+
+  getFromDependancy() {
+    return this.serviceOne.fromServiceOne(); 
+  }
+}
+
+// Spec
+describe(() => {
+  let service: DataService;
+  let serviceOne: jasmine.SpyObj<ServiceOne>
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      providers: [
+        DataService,
+        {provide: ServiceOne, useValue: jasmine.createSpyObj('ServiceOne', ['fromServiceOne', ...other method from ServiceOne to use spy])}
+      ]
+    });
+
+    service = TestBed.get(DataService);
+    serviceOne = TestBed.get(ServiceOne);
+  });
+
+  it('should return value from own', () => {
+    expect(service.getFromOwn()).toBe('some valid url');
+  })
+
+  it('should return value from dependancy', () => {
+    serviceOne.fromServiceOne.and.returnValue(20)
+    expect(service.getFromDependancy()).toBe(20);
+  })
+
+});
+
+
+
+
+
+Testing Observable and Promises
+// Service
+@Injectable()
+export class DataService {
+  public observable = of('value from observable');
+
+  returnPromise() {
+    return new Promise((res, rej) => {
+      res(25);
+    });
+  }
+}
+
+// Spec
+describe(() => {
+  let service: DataService;
+  let subscriber : Subscription;
+
+  beforeEach(async () => {
+    service = await TestBed.get(DataService);
+  });
+
+  beforeEach(async () => {
+    subscriber.unsubscribe();
+  });
+
+  it('Should get value after subscribe', (done) => {
+    subscriber = service.observable.subscribe(value => {
+      expect(value).toBe('value from observable');
+      done();
+    })
+  })
+
+  it('Should get value after promise resolve', (done) => {
+    service.returnPromise().then(val => {
+      expect(val).toBe(25);
+    })
+  })
+})
+
+
+
+
+
+Test Http call
+// Service
+@Injectable()
+export class DataSerice {
+  constructor(private http: HttpClient){}
+
+  get() {
+    return this.http.get('some/valid/url')
+  }
+}
+
+// Spec
+describe(() => {
+  let service: DataService;
+  let http: jasmine.SpyObj<HttpClient>;
+
+  const spy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      providers: [
+        DataService,
+        {provide: HttpClient, useValue: spy}
+      ],
+    })
+
+    service = TestBed.get(DataService);
+    http = TestBed.get(HttpClient);
+  });
+
+  it('should get data from http', (done) => {
+    http.get.and.returnValue(of(120));
+    service.get().subscribe(value => {
+      expect(value).toBe(120);
+      done();
+    });
+  });
+})
+
+
+
+
+How to Use Fake service
+// Service
+  @Injectable()
+  export class DataService {
+    getData() {
+      return http.get();
+    }
+
+    saveData() {
+      return http.post()
+    }
+  }
+Create object with same properties as Actual service has
+  const spyObj = {
+    getData: () => of({status: 200, message: 'Data retrieved successfully', result: [...records]}),
+    saveData: () => of({status: 201, message: 'Data Saved'}),
+  }
+
+Declare variable in suite which holds for fake service
+Create spy obj to inject in testing module
+  describe(() => {
+    let fakeDataService: jasmine.SpyObj<DataService>;
+    const spy = jasmine.createSyObj<DataService>('<DataService>', spyObj);
+  })
+
+Inject Fake serice in testing module in before method
+  await TestBed.configureTestingModule({
+    providers: [
+      ...other services,
+      {provide: DataService, useValue: spy},
+    ]
+  });
+
+Get fake service reference after configuration of testing module in before method
+  fakeDataService = TestBed.get(DataService);
+
+Assert if method from fakeservice is called in flow
+  expect(fakeDataService.getData).toHaveBeenCalled();
+
+
+
+
+
+
+fakeAsync ant 
+tick- Simulates the asynchronous passage of time for the timers
+  eg
+  tick(1000); // wait for 1000 ms
+
+To use tick in spec we have to wrap spec function in fakeAsync
+  eg
+  it('should wait for 1000 ms in between execution', fakeAsync(() => {
+    // assert expections
+    tick(1000)
+    // assert expections again
+  }))
+
+Case to use tick()
+This is useful when we have some asynchronous validators on a control
+async validators uses debouncing to validate data
+as it waits for some time, we also need to wait for some time to complete validation
