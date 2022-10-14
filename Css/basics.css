@@ -238,10 +238,254 @@ a[href^="https"] - attribute value begins with “https”
 a[href$=".pdf"] - attribute value ends with “.pdf”
 a[href*="css"] - attribute value contains the substring “css”.
 
+initial
+initial valueof property means defaultvalue of property
+inherit
+inherit value of property from its parent
+
 
 Flexbox
+Flex Layout 
+Using flex layout we decide that how the content of flex container should be visible on page
+Two parts of flexlayout 1. container, 2. children items
+Flexbox applies some properties to container and some to items
+// container
+display: flex; // enables flex layout for container and its children
+flex-direction // sets direction, that how children visible
+flex-wrap   // decides if container width ends, children should wrap to next line or not
+justify-content // how much space should be there in between items
+align-items // decide place of items
+align-content // best works with flex-wrap: wrap
+
+align-items // baseline vs center
+
+// child item
+order // decides order of child element
+flex-grow //
+flex-shrink //
+flex-basis //
+flex // shorthand for grow, shrink, basis
+align-self // align-items sets for all children from container, self-align sets for self 
+
 Grid
+Its grid-based layout system, with rows and columns
+children automatically becomes grid-items
+container property
+display: grid
+
+grid-template-columns: auto auto auto;
+
+grid-template-areas
+
+children properties
+grid-column-start: 1;
+grid-column-end: 3;
+
+grid-row-start: 1;
+grid-row-end: 3;
+
+grid-area 
+
+
+
+Flex v/s Grid
+Flexbox is made for one-dimensional layouts
+Grid is made for two-dimensional layouts
+display: flex defines flex container
+display: grid defines grid container
+In the flex item, the box stretches as far as the content goes.
+Grid does not stretch automatically according to the content.
+Flexbox is for small design to work with a few rows and columns
+Grid is for complex design to work with
+If we need to align the elements go with flex
+If we need to add gaps over the block elements go with grid
+
+
 Positions
+Used to define layouts
+  static - Default value of position property
+    doesn’t affetch by TRBL i.e. top, right, bottom, left
+    It renders as it writtern in markup
+  relative - Relative to its normal position but affets by TRBL
+  absolute - relative to nearest ancestor who is having relative position
+    If no relative ancestor available relative to browser window
+  fixed - relative to browser
+  sticky - position based on user's scroll
+    Once reached to given offset, sticks there
+
+
+
+
+
 Media queris and RWD
-Preprocessor scss
+It uses the @media rule to include a block of CSS properties only if a certain condition is true.
+  @media only screen and (max-width: 600px) { // If the browser window is 600px or smaller
+    body {
+      background-color: lightblue;
+    }
+  }
+
+
+
+
 display property
+none              - element removes from dom
+inline            - element behaves like span element (Default Value), doesn’t apply height and width
+block             - element behaves like p element
+flex              - block-level flex container
+grid              - block-level grid container
+inline-block      - inline-level block container, element formatted as inline but can assign height and width
+inline-flex       - inline-level flex container
+inline-grid       - inline-level grid container
+
+Suppose we have 3 children in inline-flex then containers width will be sum of each items width
+but in case of flex, it covers 100% width of parent
+
+Same applys to grid vs inline grid
+
+
+
+
+
+Center contents
+Horizontal centered text
+  // container
+  text-align: center;
+Center a div
+  // child
+  margin: 0 auto;
+Center a Div with Flexbox
+  display: flex;
+  justify-content: center; // if only use this, horizontally center
+  align-items: center; // if only use this, vertically center
+Center a Div with CSS Absolute Positioning and Negative Margins
+  // container
+    position: relative;
+  // child
+    position: absolute;
+    top: 50%; // if only use top, mekes vertically center
+    left: 50%; // if only use left, mekes horizontally center
+    transform: translate(0, -50%);
+
+
+
+
+Styling  scrollbars
+We can use the following pseudo elements to styling scrollbars
+::-webkit-scrollbar               the scrollbar.
+::-webkit-scrollbar-button        the buttons on the scrollbar (arrows pointing upwards and downwards).
+::-webkit-scrollbar-thumb         the draggable scrolling handle.
+::-webkit-scrollbar-track         the track (progress bar) of the scrollbar.
+::-webkit-scrollbar-track-piece   the track (progress bar) NOT covered by the handle.
+::-webkit-scrollbar-corner        the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet.
+
+height used to manage width of horizontal scrollbar
+
+
+
+Preprocessors
+CSS preprocessors make it easy to automate repetitive tasks, reduce the number of errors
+Create reusable code snippets
+ensure backward compatibility
+
+SCSS
+Provides nesting so you can use nested syntax
+Allows variables to avoid repeating values
+Mixins - mixin can accept parameters and return CSS
+@extend feature — Avoid repeating the same styles again and again
+Create Partials and use in other scss file, this way we can enable modularization
+We van use standard math operators like +, -, *, math.div(), and %. by using @use "sass:math";
+
+
+
+Using Variables
+  $primary-color: #333;
+  body {
+    color: $primary-color;
+  }
+
+
+
+Using Nested rules
+  nav {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+  }
+
+
+
+Using Partials
+  Creating partial 
+  _base.scss
+  Use partial
+  @use 'base'
+
+
+
+Using Mixins
+  Creating mixin with default value using @mixin directive
+  @mixin abc {
+    // properties
+  }
+  @mixin theme($theme: DarkGray) {
+    background: $theme;
+    box-shadow: 0 0 1px rgba($theme, .25);
+    color: #fff;
+  }
+
+  // Use in code using @include directive
+  .info {
+    @include theme; // will pick default values i.e. DarkGray for .info
+  }
+
+  .alert {
+    @include theme($theme: DarkRed); 
+    // DarkRed theme for .alert 
+    // Passing variables to mixin
+  }
+
+
+
+
+Using inheritance using @extend and percentage sign (%)
+  %message-shared {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #333;
+  }
+
+  .message {
+    @extend %message-shared;
+  }
+
+  If we haven't extend %message-shared, then %message-shared will not generate anything
+
+
+
+
+Using Operators
+  To enable math operations
+  @use "sass:math";
+  Use division
+  article[role="main"] {
+    width: math.div(600px, 960px) * 100%;
+  }
+
+
+
+Using loops @each
+  @mixin prefix($property, $value, $prefixes) {
+    @each $prefix in $prefixes {
+      -#{$prefix}-#{$property}: $value;
+    }
+    #{$property}: $value;
+  }
+
+  .gray {
+    @include prefix(filter, grayscale(50%), moz webkit);
+  }
+
+@if, @if @else, @for @while

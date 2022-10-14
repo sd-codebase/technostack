@@ -1,0 +1,152 @@
+What if browser  does not support html5?
+    browser will simply ignore that tag, it won't throw any error.
+
+
+Websocket
+    Websocket is two way communication technology for web applications
+     which operates over a single socket and is exposed via a JavaScript interface
+     in HTML 5 compatible browsers
+    Eg
+    // Create javascript function to work with socket
+    function WebSocketTest() {}
+    // Check if browser supports Websocket
+    if ("WebSocket" in window){}
+    // open Websocket
+    var ws = new WebSocket("ws://localhost:9998/echo");
+    // open handler
+    ws.onopen = function() { }; // we can inform user that connection is successfull
+    // send message using send method
+    ws.send("Message to send")
+    // recieve message handler, we recieve event we can access data property of event
+    ws.onmessage = function(evt) { evt.data}
+    // connection close handler
+    ws.onclose = function() {} // inform user that connection is closed with Websocket
+    // close connection using close() method
+    ws.close();
+
+
+
+Webworkers
+A web worker is a JavaScript running in the background, without affecting the performance of the page.
+    // check if browser supports Webworkers
+    if (typeof(Worker) !== "undefined")
+    // create javascript external file
+    suppose demo-worker.js
+    // Create a Web Worker Object
+    let ww = new Worker("demo_workers.js");
+    // Stop Webworkers
+    ww.terminate()
+    // recieve data in main thread from worker file
+    ww.onmessage = function(event) {
+      event.data;
+    };
+    // send data from worker file after computation done using postMessage()
+    postMessage(computationResult);
+    // Send data from main thread to worker file
+    ww.postMessage("message from main thread")'
+    // recieve message handler in worker file
+    onmessage = function(evt) {
+        const dataFromMainThread =evt.data
+    }
+There are shared worker also
+
+
+
+SSE - One Way Messaging
+Server-Sent Events (SSE) allow a web page to get updates from a server
+var source = new EventSource("demo_sse.php");
+source.onmessage = function(event) {
+  document.getElementById("result").innerHTML += event.data + "<br>";
+};
+// Methods
+    1 - onopen // when connection established
+    2 - onmessage // when message recieve
+    3 - onerror // when error occurs
+
+
+
+Symantic tags means elements with a meaning, and decribes about its content
+    A semantic element clearly describes its meaning to both the browser and the developer.
+    Eg
+    <form>, <table>, and <article>
+    non-semantic elements: <div> and <span> - Tells nothing about its content.
+
+Block vs inline tags
+    HTML element has a default display value, depending on what type of element it is.
+    A block-level element always starts on a new line, and the browsers automatically add some space (a margin) before and after the element.
+    A block-level element always takes up the full width available
+    Eg
+    div, p
+
+    An inline element does not start on a new line.
+    An inline element only takes up as much width as necessary
+    Eg
+    span
+
+
+Web storages, local and session
+web storage, web applications can store data locally within the user's browser
+Web storage is more secure, and large amounts (at least 5MB) of data can be stored locally, without affecting website performance.
+    localStorage - stores data with no expiration date
+    // Store
+    localStorage.setItem("lastname", "Smith");
+    // Retrieve
+    localStorage.getItem("lastname");
+    // Remove  item
+    localStorage.removeItem("lastname");
+    // Clear localStorage
+    localStorage.clear()
+
+    sessionStorage - data is lost when the browser tab is closed
+
+
+Tags vs elements and void element
+    HTML element is defined by a start tag, some content, and an end tag.
+    HTML elements can be nested
+    Tag is part of element and tags can be start tag and end tag
+
+
+Html entities
+    Reserved characters in HTML must be replaced with character entities.
+    If you use the less than (<) or greater than (>) signs in your text
+    Syntax: &entity_name; // start with & and ends with the ;and between them entity name
+    Eg: &lt; &nbsp;
+
+multipart/form-data
+    Multipart/form-data is one of the most used enctype/content type.
+    When you make a POST request, you have to encode the data that forms the body of the request
+    We have to use multipart/form-data when your form includes any <input type="file"> elements
+    Eg: enctype = "multipart/form-data"
+
+
+
+dl, dt, dd
+types of lists
+Optimise website assets loading
+HTML5 Advantages
+Audio and Vidio Tags
+mark tag
+figure, figcaption
+datalist vs select
+meter vs progress
+HTML graphics
+svg and canvas
+make image responsive
+media elemets in html5
+object embed
+New input types
+novalidate
+noscript
+pollyfills
+manifest
+geolocation api
+
+Formatting Elements
+HTML Tables
+Iframes
+Html responsive
+HTML forms
+Drag n drop
+Doctype
+HTTP Status Messages
+

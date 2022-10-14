@@ -724,3 +724,197 @@ Case to use tick()
 This is useful when we have some asynchronous validators on a control
 async validators uses debouncing to validate data
 as it waits for some time, we also need to wait for some time to complete validation
+
+
+Test template driven form
+
+// Component
+@Component({
+  selector: 'app-template-form',
+  template: `
+    <form (ngSubmit)="handleSubmit()" #testForm="ngForm">
+      <input type="text" [(ngModel)]="user.firstName" required #firstName="ngModel" data-testid="firstNameInput">
+      <input type="text" [(ngModel)]="user.lastName" required #lastName="ngModel" data-testid="lastNameInput">
+      <select [(ngModel)]="user.gender" required #gender="ngModel" data-testid="genderComboBox">
+        <option value="M" data-testid="genderMale">Male</option>
+        <option value="F" data-testid="genderFemale">Female</option>
+      </select>
+      <button type="submit" value="Submit" data-testid="submitButton"></button>
+      <span class="text-danger" *ngIf="(firstName.touched && (!testForm.valid) && firstName.errors?.required" data-testid="firstNameError">
+        First name is required
+      </span>
+    </form>
+  `,
+})
+export class TestFormComponent {
+  user = {
+    firstName: null,
+    lastName: null,
+    gender: null
+  };
+
+  handleSubmit() {
+    console.log(this.user);
+  }
+}
+
+// Spec
+describe(() => {
+  let fixture: ComponentFixture<TestFormComponent>;
+
+  beforeEach(async () => {
+    await TestBed
+      .configureTestingModule({
+        declarations: [TestFormComponent],
+        imports: [FormsModule],
+      })
+      .compileComponents();
+
+    fixture = TestBed.createComponent(TestFormComponent);
+    fixture.detectChanges();
+  })
+
+  it('should update values in form controls', () => {
+    const {debugElement, componentInstance: component} = fixture;
+    const {
+      fNameInput, 
+      lnameInput, 
+      genderCombo, 
+      maleOption, 
+      femaleOption, 
+      submitButton
+    } = findEls([
+      'firstNameInput', 'lastNameInput', 'genderComboBox', 'genderMale', 'genderFemale', 'submitButton'
+    ]);
+
+    fNameInput.nativeElement.value = "John";
+    lNameInput.nativeElement.value = "Deo";
+    genderCombo.triggerEventHandler('click', null);
+    femaleOption.triggerEventHandler('click', null);
+    submitButton.triggerEventHandler('click', null);
+
+    fixture.detectChanges();
+
+    expect(component.user.firstName).toBe("John");
+    expect(component.user.lastName).toBe("Deo");
+    expect(component.user.gender).toBe("F");
+  });
+
+  it('should show error if firstname is empty', () => {
+    const {debugElement, componentInstance: component} = fixture;
+    const {
+      fNameInput, 
+      lnameInput, 
+      genderCombo, 
+      maleOption, 
+      femaleOption, 
+      submitButton
+    } = findEls([
+      'firstNameInput', 'lastNameInput', 'genderComboBox', 'genderMale', 'genderFemale', 'submitButton'
+    ]);
+
+    submitButton.triggerEventHandler('click', null);
+
+    fixture.detectChanges();
+
+    const firstNameError = findEl('firstNameError');
+    expect(firstNameError.nativeElement.textContent).toBe("First name is required");
+  });
+});
+
+
+TDD Test Reactive form
+
+//Spec
+describe(() => {
+  let fixture: ComponentFixture<TestReactiveComponent>;
+
+  beforeEach(async () => {
+    await TestBed
+      .configureTestingModule({
+        declarations: [TestReactiveComponent],
+        imports: [ReactiveFormsModule],
+      })
+      .compileComponents();
+
+    let fixture = TestBed.createComponent(TestReactiveComponent);
+    fixture.detectChanges();
+  });
+
+  it('should update form value in form controls', () => {
+    const {debugElement, componentInstance: component} = fixture;
+
+    const [
+      fNameControl,
+      lNameControl,
+      genderControl,
+      genderMaleOption,
+      submitButton,
+    ] = findEls([
+      'fName',
+      'lName',
+      'gender',
+      'maleOption',
+      'submit'
+    ]);
+
+    fNameControl.nativeElement.value = 'John',
+    lNameControl.nativeElement.value = 'Deo',
+    genderControl.triggerEventHandler('click', null);
+    genderMaleOption.triggerEventHandler('click', null);
+    submitButton.triggerEventHandler('click', null);
+
+    fixture.detectChanges();
+    const formValue = component.userForm.value;
+    expect(formValue.fname).toBe('John');
+    expect(formValue.lname).toBe('Deo');
+    expect(formValue.gender).toBe('M');
+  });
+
+  it('should show error if fname is empty', () => {
+    const {debugElement, componentInstance: component} = fixture;
+
+    const submitButton = findEl( 'submit' );
+    
+    submitButton.triggerEventHandler('click', null);
+
+    fixture.detectChanges();
+
+    const fNameError = findEl( 'firstNameError' );
+
+    expect(fNameError.nativeELement.textContent).toBe('First name is required');
+  })
+})
+
+//Component
+@Component({
+  selector: 'app-reactive-form-test',
+  template: `
+    <form [formGroup]="userForm" (ngSubmit)="handleSubmit()">
+      <input type="text" name="fname" formControlName = "fname" data-testid="fName"/>
+      <input type="text" name="lname" formControlName = "lname" data-testid="lName"/>
+      <select name="gender" formControlName = "gender" data-testid="gender">
+        <option value="M" data-testid="maleOption">Male</option>
+        <option value="F">Female</option>
+      </select>
+      <button type="submit" data-testid="submit">Submit</button>
+      <span class="text-danger" data-testid="firstNameError"
+          *ngIf="(userForm.controls.fname.touched) && userForm.controls.fname.errors?.required">
+          First name is required
+      </span>
+    </form>
+  `
+})
+export class TestReactiveComponent {
+  userForm = new FormGroup({
+    fname: ['', Validators.required],
+    lname: [''],
+    gender: [''],
+  });
+  constructor(private fb: FormBuilder) {}
+
+  handleSubmit() {
+    console.log(this.userForm.value);
+  }
+}
+
