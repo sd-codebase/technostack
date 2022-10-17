@@ -1,3 +1,10 @@
+Doctype
+    HTML documents must start with a <!DOCTYPE> declaration.
+    It is an "information" to the browser about what document type to expect
+    eg
+    <!DOCTYPE html> // html5 document
+
+
 What if browser  does not support html5?
     browser will simply ignore that tag, it won't throw any error.
 
@@ -119,34 +126,220 @@ multipart/form-data
     Eg: enctype = "multipart/form-data"
 
 
-
-dl, dt, dd
 types of lists
-Optimise website assets loading
+    Unordered, Ordered, Description lists,
+    1. ul, li, // css list-style-type: [disc, circle, square, none]
+    2. ol, li, // attribute type="1", "A", "a", "i", "I"
+    3. dl - defined description list container
+        dt - description term
+        dd - description of term in description list (while rendering use left padding)
+
+
+
 HTML5 Advantages
-Audio and Vidio Tags
+    1. Cleaner markup/ Improved code:
+    HTML5 will enable web designers to use cleaner, neater code.
+     We can remove div tags and replace them with semantic HTML5 elements.
+    2. Elegant forms:
+    HTML5 enables designer to use fancier forms.
+     There will be different type of inputs, search and different fields for different purpose.
+    3. Consistance
+    consistency in terms of HTML used to code a web page on one site compared to another
+    4. Supports rich media elements:
+    HTML5 has an inbuilt capability to play audio and video and so we can bid goodbye to those plugin tags.
+    5. Offline Application Cache:
+    HTML5 offers an offline application cache facility
+     which will load the page the user has visited even if the user is temporarily offline.
+
+Audio and Video Tags
+    <audio> used to play an audio file on a web page.
+    Eg
+    <audio controls autoplay muted>
+        <source src="horse.ogg" type="audio/ogg">
+        <source src="horse.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    // control attribute
+    controls attribute adds audio controls, like play, pause, and volume.
+    // autoplay
+    audio start playing automatically
+    // muted
+    audio muted while playing, we can eneble bu using volume control
+    // source 
+    <source> element allows you to specify alternative audio files
+    it will pick supported one,
+    if audio doesn't support in browser render text
+
+    <video> used to show a video on a web page.
+    video has same attributs and behaves same as audio
+    In addition video has width and height attributes to render vdo player size
+
 mark tag
+    Marks or highlights text works as span with yellow background color
+
 figure, figcaption
+    <figure> element to mark up a photo in a document,
+      and a <figcaption> element to define a caption for the photo:
+    Eg
+    <figure>
+        <img src="pic_trulli.jpg" alt="Trulli" style="width:100%">
+        <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
+    </figure>
+
 datalist vs select
+    In select we have to select item from given options. It hase optiongroup tag  to support grouping
+    But in data list we can select option as well as we can enter any text
+     Id data list we do not have optiongroup
+    Select - select, option, optiongroup
+    Datalist- we have to create one input having list attribute
+        list attribute value will be id of datalist
+        datalist, option
+        Eg
+        <input type="text" list="Gender">
+        <datalist id="Gender">
+            <option value="Male">
+            <option value="Female"> 
+        </datalist>
+
 meter vs progress
+    <progress> is used to convey how much work in a task has been completed,
+     the <meter> element is used to display a measurement on a known scale.
+    We can think that progress value will be dynamic and it will change as per the progress of task
+    meter is used to show static values of scales eg. disk usage, it has mix and max value
+    eg
+    <meter id="disk_c" value="2" min="0" max="10">2 out of 10</meter><br>
+    <meter id="disk_d" value="0.6">60%</meter>
+
 HTML graphics
 svg and canvas
+    We can render different types of graphics in webpage using canvar and svg
+
 make image responsive
-media elemets in html5
+    Using height: auto and width: 100% or fixed value will make images responsive
+
+media elemets in html5, audio, video, embed, source, track
+
+
 object embed
-New input types
+    Both the <embed> and <object> tags are used to load external plugin content
+    embed is deprecated
+     embed use src attribute for multimedia object
+     Object tag uses data attribute
+    Both takes height width
+    both takes type to define type of data or src file
+    eg // load pdf file
+    <object type="application/pdf"
+            data="data/uploads/media/default/0001/01/540cb75550adf33f281f29132dddd14fded85bfc.pdf"  
+            width="300" 
+            height="200">
+      <a href="/uploads/media/default/0001/01/540cb75550adf33f281f29132dddd14fded85bfc.pdf">download pdf</a>
+    </object>
+    or // play youtube video
+    <object width="320" height="240" data="https://www.youtube.com/embed/bZNEB_o3Hzw?ecver=2">
+    </object>
+
+
 novalidate
+    When present, it specifies that the form-data (input) should not perform html validations when submitted.
+
 noscript
+    <noscript> HTML element defines a section of HTML to be inserted if a script type on the page is unsupported or if scripting is currently turned off in the browser.
+
 pollyfills
-manifest
+    A polyfill is a piece of code (or plugin) that provides the technology that the developer, expect the browser to provide natively.
+
+
+Iframes
+    <iframe> tag specifies an inline frame.
+    used to embed another document within the current HTML document.
+    src - specify url
+    srcdoc - specify html code to render in iframe
+    height and width
+
+while playing youtube video via html multiledia we can append few queryparam to youtube url for specific purpose
+    eg. mute=1 // will mute video
+    autoplay=1 // autoplay video on page rendering
+
+For PWA we use manifest.json and serviceWorker.js file
+    in manifest file, we store name, short_name, icons, start_url
+    serviceWorker will cache the resources
+    // This is overview
+
 geolocation api
+    HTML5 API used to Locate the User's Position
+    User should approve location access 
+    // Check if browser supports grolocation
+    if (navigator.geolocation)
+    // getCurrentPosition() method to get current coordination
+    navigator.geolocation.getCurrentPosition(showPosition);
+    // watchPosition() Method to watch current coordination as user moves
+    navigator.geolocation.watchPosition(showPosition);
+    // clearWatch() to stop accessing current position
+    navigator.geolocation.clearWatch();
+
+    Both method takes a callback function which will retrive latitude and longitude using position object
+    function showPosition(position) {
+        position.coords.latitude;
+        position.coords.longitude;
+    }
+
+
+New input types
+    in html5 added new input types to record data from user
+    color, date, datetime-local, email, month, number, range, search, tel, time, url, week
+
+Drag n drop
+    any element can be dragged and dropped.
+    draggable="true", ondragstart="drag(event)" // on draggable item
+    ondrop="drop(event)", ondragover="allowDrop(event)" // on drop container
+    // Make element draggable
+    draggable="true"
+    // set data when drag start event occurrs
+    ondragstart="drag(event)"
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+    // in droppable element ondragover event occurrs
+    ondragover="allowDrop(event)"
+    function allowDrop(event) {
+        event.preventDefault()
+    }
+    // ondrop event when drop complets
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+
 
 Formatting Elements
+    user to format text withou using using css
+    strong, small, em, del, sub, sup, mark
+
 HTML Tables
-Iframes
+    table, caption, thead, tbody, tr, th, td,
+
 Html responsive
+    Responsive web design is about creating web pages that look good on all devices!
+    A responsive web design will automatically adjust for different screen sizes and viewports.
+    To create responsive site add this meta tag in head
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 HTML forms
-Drag n drop
-Doctype
+    form is used to collect user input
+    We use form tag
+    action attribute defines the action to be performed when the form is submitted.
+    target attribute specifies where to display the response that is received after submitting the form.
+    method attribute specifies the HTTP method to be used when submitting the form data.
+    autocomplete attribute specifies whether a form should have autocomplete on or off.
+    Uses form elements loke input, select, label, textarea, button, 
+
 HTTP Status Messages
+    1xx: Information
+    2xx: Successful, 200 OK, 201 Created, 
+    3xx: Redirection, 308 Permanent Redirect, 307 Temparory Redirect
+    4xx: Client Error, 400 Bad Reques, 401 Unauthorized, 403 Forbidden, 408 Request Timeout, 404 Not Found
+    5xx: Server Error, 500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable, 504 Gateway Timeout
+
+Optimise website assets loading
 
