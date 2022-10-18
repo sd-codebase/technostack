@@ -19,14 +19,13 @@ Assign it to class member
 Pass class members to children
 
 
-
 Passing observables to child
     // Parent ts
     private _data = new Subject<string>();
     readonly data$ = this._data.asObservable();
 
     // Parent template
-    <child [$data]="$data" />
+    <child [data$]="data$" />
 
     // send data to child from parent method
     this._data.next('next text');
@@ -40,13 +39,15 @@ Passing observables to child
 
 
 
-env, use env in component
+environment
 We use different environment files for different environment
 Its simply json file
-We write keys of access points in environment file such as API_KEYS, Api Endpoints domains, Urls to serve static files
+We write keys of access points in environment file such as
+ API_KEYS, Api Endpoints domains, Urls to serve static files
 In production mode we write production property to true
 We can create our own environment files as per need
-We configure to replace environment files in angular.json file under configuration section of architect
+We configure to replace environment files in angular.json file
+ under configuration section of architect
 We can configure for production, test, debug modes
 eg.
     "configuration": {
@@ -66,9 +67,11 @@ eg.
 
 Techniques to render large no of nodes on page
 Virtual Scrolling - Using CDK’s Scrolling module
-    given a container and a list of items, an item is only rendered if it’s within the visible boundaries of the container
+    given a container and a list of items, an item is only rendered
+     if it’s within the visible boundaries of the container
     1 - Import ScrollingModule from CDK
-    2 - Add element cdk-virtual-scroll-viewport and pass itemSize to how many records to show in one slot
+    2 - Add element cdk-virtual-scroll-viewport and
+     pass itemSize to how many records to show in one slot
         <cdk-virtual-scroll-viewport itemSize="50"></cdk-virtual-scroll-viewport>
     3 - render items using cdkVirtualFor structural directive instead of ngFor
         <div *cdkVirtualFor="let item of items">
@@ -82,8 +85,10 @@ Progressive rendering
     This allows the browser to smoothly and progressively render all the items.
     eg
     Using createEmbeddedView and setInterval
-    We create view for subset of items, we stop script for some miliseconds, and rendering enging renders that item in dom
-    then create views for next batch of items, stop script, renders views and this way we achive progressive rendering
+    We create view for subset of items, we stop script for some miliseconds,
+     and rendering enging renders that item in dom
+    then create views for next batch of items, stop script, renders views
+     and this way we achive progressive rendering
     eg
     buildData(list, itemSize = 500) {
         let currentIndex = 0;
@@ -99,7 +104,7 @@ Progressive rendering
                 this.container.createEmbeddedView(this.template, list[n]);
             }
 
-            currentIndex += ITEMS_RENDERED_AT_ONCE;
+            currentIndex += itemSize;
         }, 10);
     }
 

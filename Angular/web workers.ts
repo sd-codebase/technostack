@@ -1,6 +1,6 @@
 Web workers
 We run CPU-intensive computations in a background thread,
- this way we can free main thread to user interface
+ this way we can free main thread to update user interface
 Using web workers can help increase your application's performance
 
 Adding a web worker

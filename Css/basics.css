@@ -1,10 +1,13 @@
+What is CSS
+Cascading Style Sheets is used to define styles for your web pages
+
+
 Ways to apply CSS
 1- Using inline style attribute on an element
 2- Using a <style> block in the <head> section
 3- Loading an external CSS file using the <link> tag
 
-What is CSS
-Cascading Style Sheets is used to define styles for your web pages
+
 
 Use variables in CSS
 Declares variables in :root {} psudo-class or rule
@@ -16,13 +19,20 @@ Declares variables in :root {} psudo-class or rule
     height: var(--my-variable-name);
   }
 
+
+
 CSS sprites
 CSS sprites combine multiple images into one single larger image
+
+
 
 
 CSS “box model”
 CSS box model is a rectangular layout paradigm for HTML elements that consists:
 Content , Padding, Border, Margin
+
+
+
 
 CSS rule
 Web browsers apply CSS rules to a document to affect how they are displayed
@@ -31,6 +41,8 @@ css rules consists of set of properties and selector
   .selectorClass {
     height: 1em;
   }
+
+
 
 @extend directive in scss
 Using @extend lets you share a set of CSS properties from one selector to another
@@ -45,17 +57,24 @@ Using @extend lets you share a set of CSS properties from one selector to anothe
     border-color: green;
   }
 
+
 floats 
-The float CSS property places an element on the left or right side of its container, allowing text and inline elements to wrap around it.
+The float CSS property places an element on the left or right side of its container,
+ allowing text and inline elements to wrap around it.
   eg
   #sidebar {
     float: right; // left right none inherit
   }
-  The CSS clear property can be used to be positioned below left/right/both floated elements.
+  The CSS clear property can be used to be positioned below left/right floated elements.
+
+
+
 
 difference between classes and IDs
 IDs — Meant to be unique within the document.
 Classes — Can be reused on multiple elements within the document
+
+
 
 
 usage of "table-layout" property
@@ -68,55 +87,89 @@ The table-layout property defines the algorithm used to layout table cells, rows
   4. inherit - Inherits this property from its parent element
 
 
+
+
 responsive design vs adaptive design
 Both attempt to optimize the user experience across different devices,
  adjusting for different viewport sizes
-1. Responsive design - website that can look good on any device. Responsive websites use media queries, flexible grids, and responsive images
-2. Adaptive design - Instead of one flexible design, adaptive design detects the device and other features, and then provides the appropriate feature and layout based on a predefined set of viewport sizes and other characteristics.
+1. Responsive design - website that can look good on any device.
+ Responsive websites use media queries, flexible grids, and responsive images
+2. Adaptive design - Instead of one flexible design,
+ adaptive design detects the device and other features,
+ and then provides the appropriate feature and layout based on
+ a predefined set of viewport sizes and other characteristics.
 
-CSS selectors and Combinators(whitespace >, ~, +)
+
+
+
+CSS selectors and Combinators(whitespace, >, ~, +)
 1. Universal selector: *
 2. Element type selector: ul, td
 3. ID Selector: #id
 4. Class selector: .box
-5. Descendant combinator: #id .box. The .box element doesn’t have to be an immediate child of #id. (whitespace)
-6. Child combinator: #id > .box. Unlike the descendant combinator, there can’t be another element wrapping .box
+5. Descendant combinator: #id .box. The .box element doesn’t have to be
+ an immediate child of #id. (whitespace)
+6. Child combinator: #id > .box. Unlike the descendant combinator,
+ there can’t be another element wrapping .box
 7. General Sibling Combinator: ~
-8. Adjacent Sibling Combinator: +. The difference from general sibling combinaltor is that the targeted element must be an immediate sibling, not just a general sibling.
+8. Adjacent Sibling Combinator: +. The difference from general sibling combinaltor is
+ that the targeted element must be an immediate sibling, not just a general sibling.
 9. Attribute Selector: input[type="text"]
-10. Pseudo-class: a:hover. A pseudo-class uses a colon character to identify a pseudo-state that an element might be in.
-11. Pseudo-element: .container::before. This selector inserts an imaginary element into the page, inside the targeted element, before its contents.
+10. Pseudo-class: a:hover. A pseudo-class uses a colon character
+ to identify a pseudo-state that an element might be in.
+11. Pseudo-element: .container::before. This selector inserts an imaginary element into the page,
+ inside the targeted element, before its contents.
+
+
 
 
 fixing browser-specific style issues
-After identifying the issue and the offending browser, use a separate style sheet that only loads when that specific browser is being used. This technique requires server-side rendering though.
+After identifying the issue and the offending browser,
+ use a separate style sheet that only loads when that specific browser is being used. 
+ This technique requires server-side rendering though.
 Use libraries that already handles these styling issues
 Use autoprefixer to automatically add vendor prefixes to your code
 Use Reset CSS or Normalize.css.
+
 
 
 difference between “resetting” and “normalizing” CSS
 Resetting — is meant to strip all default browser styling on elements.
 Normalizing — preserves useful default styles rather than “unstyling” everything.
 
+
+
 Create zebra stripped table using nth-child 
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
+
+
 purpose of clearing floats
  to control the floating elements by preventing overlapping
 
+
+
 What does * { box-sizing: border-box; } (content-box or border-box)
-border-box tells the browser to calculate for any border and padding in the values  element's width and height.
+border-box tells the browser to calculate for any border and padding
+ in the values element's width and height.
+
+
 
 
 responsive versus mobile-first strategy
-Responsive design starts on the desktop; that is, at the maximum required resolution, and then scales down to the smallest screen.
-Mobile-first design is similar to designing a mobile app first and then adapting the layout that it can be viewed neatly on tablet and desktop devices
+Responsive design starts on the desktop; that is, at the maximum required resolution,
+ and then scales down to the smallest screen.
+Mobile-first design is similar to designing a mobile app first and
+ then adapting the layout that it can be viewed neatly on tablet and desktop devices
+
+
 
 Specificity
-If there are two or more CSS rules that point to the same element, the selector with the highest specificity value will "win", and its style declaration will be applied to that HTML element.
+If there are two or more CSS rules that point to the same element,
+ the selector with the highest specificity value will "win",
+  and its style declaration will be applied to that HTML element.
 Its like score or rank like 1, 10, 100, 1000
 specificity level of a selector
 1. Inline styles - Example: <h1 style="color: pink;">
@@ -124,10 +177,23 @@ specificity level of a selector
 3. Classes, pseudo-classes, attribute selectors - Example: .test, :hover, [href]
 4. Elements and pseudo-elements - Example: h1, ::before
 
+
+
 how to calculate specificity
-Start at 0, add 100 for each ID value, add 10 for each class value (or pseudo-class or attribute selector), add 1 for each element selector or pseudo-element.
+Start at 0, add 100 for each ID value, add 10 for each class value
+ (or pseudo-class or attribute selector), add 1 for each element selector or pseudo-element.
 Inline style gets a specificity value of 1000, and is always given the highest priority!
  if you use the !important rule, it will even override inline styles!
+
+
+
+
+
+
+
+
+
+
 
 different ways to visually hide content 
 display:none or visibility: hidden
@@ -138,12 +204,21 @@ opacity: 0
 Absolutely positioning and content off-screen: {left: -10000}
 
 
+
 z-index
-The z-index property specifies the stack order of an element. An element with greater stack order is always in front of an element with a lower stack order.
+The z-index property specifies the stack order of an element.
+ An element with greater stack order is always in front of an element with a lower stack order.
 z-index only works on positioned elements
 
+
+
+
 clearfix
-A clearfix is a way for an element to automatically clear or fix its elements so that it does not need to add additional markup.
+A clearfix is a way for an element to automatically clear or fix its elements so
+ that it does not need to add additional markup.
+
+
+
 
 cascading means- selecting from several sources
 Cascade is a algorithm or method to define the weight i.e. importance of individual styling rules.
@@ -153,9 +228,13 @@ It decides one of the style rule to apply out of 4 rules
 3. Styles inside CSS file
 4. Inline attribute 'style'
 
+
+
 difference between the “nth-child()” and “nth-of-type()” selectors?
 The nth-child() pseudo-class selector selects an child element based on a number,
   eg. .example :nth-child(4) // select 4 th child in example class container
+
+
 
 nth-of-type() selects an child elements based on a number and given type 
   eg. 
@@ -165,13 +244,18 @@ nth-of-type() selects an child elements based on a number and given type
 
 difference between block, inline and inline-block element?
   Block elements and display: block always start on a new line - <p>, <h1>, <div>, <header>
-  Inline elements and display: inline don't start on a new line, they appear on the same line as the content and tags -  <a>, <span> , <strong>
-  display: inline-block same as inline but additionally allows to set a width and height on the element, which is not possible in inline
+  Inline elements and display: inline don't start on a new line,
+   they appear on the same line as the content and tags -  <a>, <span> , <strong>
+  display: inline-block same as inline but additionally allows to set a width and height on
+   the element, which is not possible in inline
+
 
 
 
 Pseudo Element: A CSS pseudo-element is used to style specified parts of an element.
 Pseudo-classes: A pseudo-class is used to define a special state of an element
+
+
 
 
 clear Property
@@ -181,15 +265,22 @@ clear: both No floating elements allowed on right or left
 clear: left, or right
 
 
+
+
 What is a clearfix
-A clearfix is a way for an element to clear its child elements automatically without any additional markup.
+A clearfix is a way for an element to clear its child elements automatically
+ without any additional markup.
 The clearfix property allows a container to wrap its floated children
 eg.
   .clearfix {
     overflow: auto;
   }
-  Suppose we have right floated image in container. in this case container will always collapsed, and image will see going beyond container
-  By assigning above defined class clearfix container class will be wrapped around image and image will be fully inside of container
+  Suppose we have right floated image in container.
+   in this case container will always collapsed, and image will see going beyond container
+  By assigning above defined class clearfix container class will be wrapped around image
+   and image will be fully inside of container
+
+
 
 
 media queries, used to write devices specific css - 
@@ -200,18 +291,28 @@ media queries, used to write devices specific css -
   eg. @media screen, 
     @media only screen and (max-width: 600px) {}
 
+
+
+
 @support-  feature query
-The @supports CSS at-rule lets you specify declarations that depend on a browser's support for one or more specific CSS features. 
+The @supports CSS at-rule lets you specify declarations that depend on a browser's support for
+ one or more specific CSS features. 
 @supports (display: flex) {
   // this part of css will apply if 'display: flex' supports in browser
 }
+
+
 
 
 difference between em and rem units
 em units inherit their value from the font-size of the parent element
 rem units inherit their value from the font-size of the root element i.e. html
 
+
+
 !important - means heighest precendence
+
+
 
 
 CSS vendor prefixes
@@ -222,15 +323,25 @@ Browser specific prefixes
 -o-: Opera
 
 
+
+
+
 background-attachment: scroll
 Will scroll background image of div with its content.
+
+
+
 
 word-wrap: normal|break-word
 break-word will break th word if view port width ends in between a word
 
 
+
+
 file splitting?
 For larger projects we can create different files for typography, colors, layouts, 
+
+
 
 
 Attribute selectors
@@ -238,10 +349,14 @@ a[href^="https"] - attribute value begins with “https”
 a[href$=".pdf"] - attribute value ends with “.pdf”
 a[href*="css"] - attribute value contains the substring “css”.
 
+
+
 initial
 initial valueof property means defaultvalue of property
 inherit
 inherit value of property from its parent
+
+
 
 
 Flexbox
@@ -267,6 +382,9 @@ flex-basis //
 flex // shorthand for grow, shrink, basis
 align-self // align-items sets for all children from container, self-align sets for self 
 
+
+
+
 Grid
 Its grid-based layout system, with rows and columns
 children automatically becomes grid-items
@@ -288,6 +406,9 @@ grid-area
 
 
 
+
+
+
 Flex v/s Grid
 Flexbox is made for one-dimensional layouts
 Grid is made for two-dimensional layouts
@@ -299,6 +420,9 @@ Flexbox is for small design to work with a few rows and columns
 Grid is for complex design to work with
 If we need to align the elements go with flex
 If we need to add gaps over the block elements go with grid
+
+
+
 
 
 Positions
@@ -324,6 +448,7 @@ It uses the @media rule to include a block of CSS properties only if a certain c
       background-color: lightblue;
     }
   }
+
 
 
 
@@ -380,6 +505,10 @@ We can use the following pseudo elements to styling scrollbars
 ::-webkit-scrollbar-corner        the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet.
 
 height used to manage width of horizontal scrollbar
+
+
+
+
 
 
 
