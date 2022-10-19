@@ -739,37 +739,399 @@ Reverse string
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-Static functions and Instance functions of each
 Array functions
+    a.concat(b)	                    Joins arrays and returns an array with the joined arrays
+    fruits.copyWithin(2,0)          copyWithin() copies array elements to another position in an array, overwriting existing values
+    fruits.entries()	            Returns a key/value pair Array Iteration Object // [0, 'Banana'] [1, 'Orange']
+    every()                         return true if every element pass test function
+    fruits.fill("Kiwi");	        Fill the elements in an array with a static value
+    filter()	                    Creates a new array with every element in an array that pass a test
+    find()	                        Returns the value of the first element in an array that pass a test, else return undefined
+    findIndex()	                    Returns the index of the first element in an array that pass a test, else -1
+    forEach()	                    Calls a function for each array element
+    Array.from("ABCDEFG")           Create an array using string
+    includes()	                    Check if an array contains the specified element
+    indexOf()	                    Search the array for an element and returns its position, else return -1
+    Array.isArray(abc)	            Checks whether an object is an array
+    join()	                        Joins all elements of an array into a string
+    fruits.keys(); let key of keys; Returns keys of array
+    fruits.lastIndexOf("Apple");    Start searching from end, returns position else -1
+    map()	                         Creates a new array with the result of calling a function for each array element
+    pop()	                        Removes the last element of an array, and returns that element
+    push()	                        Adds new elements to the end of an array, and returns the new length
+    reduce()	                    Reduce the values of an array to a single value  (going left-to-right)
+    reduceRight()	                Reduce the values of an array to a single value (going right-to-left)
+    reverse()	                    Reverses the order of the elements in an array
+    shift()	                        Removes the first element of an array, and returns that element
+    slice()	                        Selects a part of an array, and returns the new array
+    some()	                        Checks if any of the elements in an array pass a test
+    sort()	                        Sorts the elements of an array, by using optional sort function
+    splice()	                    Adds/Removes elements from an array
+        fruits.splice(2, 0, "Lemon", "Kiwi"); At position 2, add 2 elements
+        fruits.splice(2, 2); At position 2, remove 2 items:
+    unshift()	                    Adds new elements to the beginning of an array, and returns the new length
+
 Object Methods
+    Object.assign(target, source)
+        copies all enumerable own properties from one or more source objects to a target object
+         It returns the modified target object.
+    Object.create(person)
+        creates a new object, using an existing object person
+    Object.entries(object1)
+        returns [key, value] pairs
+        for (const [key, value] of Object.entries(object1)) {}
+    Object.freeze(obj)
+        new properties cannot be added, existing properties cannot be removed,
+        their enumerability, configurability, writability, or value cannot be changed
+        returns same object as frozen
+
+    Object.fromEntries(entries)
+        new properties cannot be added, existing properties cannot be removed, their enumerability, configurability, writability, or value cannot be changed
+        output: Object { foo: "bar", baz: 42 }
+
+    Object.getOwnPropertyNames(object1)
+        returns an array of all properties
+        output: Array ["a", "b", "c"]
+
+    Object.getPrototypeOf(object1)
+        returns the prototype property
+        Object.getPrototypeOf(person) === Person // true
+    Object.is()
+        determines whether two values are the same value
+    Object.hasOwn(object1, 'prop')
+        returns true if the specified object has the indicated property as its own property.
+    Object.isExtensible()
+        determines if an object is extensible (whether it can have new properties added to it)
+    Object.isFrozen()
+        determines if an object is frozen
+    Object.isSealed()
+        determines if an object is sealed
+    Object.keys()
+        returns an array of a given object's own enumerable property names
+    Object.seal()
+         seals an object
+         new properties cannot be added, existing properties cannot be removed
+         only difference with freez is, value of existing properties can changes, if writable: true
+    Object.setPrototypeOf(obj, prototype)
+        sets the prototype of obj1 to prototype (prototype is usually object) or null.
+    Object.values(object1)
+        returns an array of a given object's own enumerable property values
+        output: Array ["somestring", 42, false]
+    Object.defineProperty(ob, 'prop', configObject)
+    configObject = {enumerable: false,
+      writable: false,
+      configurable: false,
+      value,}
+        defines a new property directly on an object, or modifies an existing property on an object, and returns the object
+
+    Object.prototype.hasOwnProperty()
+        returns a boolean indicating whether the object has the specified property as its own property
+    Foo.prototype.isPrototypeOf(bar)
+        checks if an object exists in another object's prototype chain
+        checks if bar object exists in Foo object's prototype chain
+
+
+
+
 String functions
+    charAt()	Returns the character at a specified index
+    charCodeAt()	Returns the Unicode of the character at a specified index
+    concat()	
+        Returns two or more joined strings
+        text1.concat(text2)
+    endsWith()
+    includes()
+    indexOf()
+    lastIndexOf()
+    match()	
+        Searches a string for a value, or a regular expression, and returns the matches
+    repeat()	
+        Returns a new string with a number of copies of a string
+        text.repeat(4);
+        Output: Hello world!Hello world!Hello world!Hello world!
+    replace()	
+        Searches a string for a value, or a regular expression, and returns a string where the values are replaced
+    search()	
+        Searches a string for a value, or regular expression, and returns the index (position) of the match
+    slice()	
+        Extracts a part of a string and returns a new string
+    split()	
+        Splits a string into an array of substrings
+    startsWith()	
+        Checks whether a string begins with specified characters
+    substr()	
+        Extracts a number of characters from a string, from a start index (position)
+    substring()	
+        Extracts characters from a string, between two specified indices (positions)
+    toLowerCase()	
+        Returns a string converted to lowercase letters
+    toUpperCase()	
+        Returns a string converted to uppercase letters
+    trim()	
+        Returns a string with removed whitespaces
+    trimEnd()	
+        Returns a string with removed whitespaces from the end
+    trimStart()	
+        Returns a string with removed whitespaces from the start
+    valueOf()	
+        Returns the primitive value of a string or a string object
+
+
 Math functions
+    Math.round(x)	Returns x rounded to its nearest integer 6.7 => 7, 6.4 => 6
+    Math.ceil(x)	Returns x rounded up to its nearest integer 6.7 => 7
+    Math.floor(x)	Returns x rounded down to its nearest integer 6.4 => 6
+    Math.pow(x, y)  x to the power of y 2,3 => 8
+    Math.sqrt(x)    square root of y 64 => 8
+    Math.min(...nums); minimun of given nums
+    Math.max(...nums); maximum of given nums
+
 
 Iterator and Generator functions
-Generics
+Iterators:
+    Iteration means traversing data
+    An iterable is a data structure that we want to traverse in. Eg. array, string, map, sets
+    An iterator is a pointer for traversing through iterables i.e. data structures
+Generator functions: Syntax function* (combination of function and *)
+    Generator function is a special type of iterator, used for traversing data
+    in generators execution will pause till thw next call;
+    When we call generator function, it will return special type of iterator, and when we call interator,
+     iterator will return object having value and done key;
+    Eg
+    function* getOtp() {
+        while(true)
+        yield Math.random().toString().substr(2, 6);
+    }
+    let otp = getOtp();
+    console.log(otp.next()); // {value: '234235', done: false};
+    console.log(otp.next()); // {value: '567249', done: false};
+
+Use cases of Generator
+    1. We can generate OTPs
+    2. We can generate fake Ids
+
+
+
+
 
 how let and const compiles
-Implement object oriented concepts
+    Variables declared using let and const are hoisted, but stays uninitialized, that's why the thow ReferenceError, if we access let and cons variable before declaration
+    These variables declarations only become initialized when the are evaluted during runtime. 
+temporal dead zone
+    This time between Hoisting and Initialization is called as Temporal Dead Zone.
+    If we access variables withing TDZ, thows ReferenceError.
+
+
 Measure javascript performance
+    To measure how much time takes to execute a loop or function or any operation, we can use one of the following method
+    1- console.time(), console.timeEnd()
+        console.time();
+        test();
+        console.timeEnd();
+        // Output
+        default: 1.2529296875ms (test function took time in ms)
+
+    2- performance.now() // gives you timestamp in ms
+    const start = performance.now();
+    test();
+    const end = performance.now();
+    console.log(end - start) // gives us time take to execute test()
+
+
+
 Improve perfomance in javascript
+    1. Event Delegation implementation
+        Sevaral event listener can affect perfomance
+    2. Avoid unwanted loops
+        Loops puts extra strain on the browser, also dont read array.length in every iteration,
+         instead declare variable and assign length of array to it, and use that variable
+    3. Gzip compression responses
+        Gzip compresses the big JavaScript files and saves the bandwidth
+    4. Minimize DOM access
+        Interaction of host browser with objects (DOM),
+         that takes place outside the JavaScript native environment,
+         results in a significant amount of performance lag
+    5. Boost performance by caching object
+        Use HTTP protocol cache or JavaScript Cache API with service worker
+    6. Get rid of unused JavaScript
+        detecting functionality which is not being used by any of the users, and get rid of that piece of code
+    7. Defer unnecessary load of JavaScript
+        It’s not necessary that all the functions are available at the initial load of a page
+        So for those function we can defer loading
+    8. Eliminate memory leaks
+        impact the overall performance, Use tools to analyse memory leak and fix them
+    9. Use tools that detect problems
+         Google PageSpeed is built to help JavaScript developer to understand areas of improvement
+         Lighthouse is a tool to audit performance
+    10. Try to achive reusability of code
+        This will decrease script size, also decreses the compile time
+
+
+
+
+Why memory leaks happen and how to avoid
+    Means piece of memory that is no longer being used by an application but,
+    for some reason is not returned back to the OS.
+    In other words, its a forgotten data forever waiting to be used
+    Eg
+    1. Undeclared/ Global Variables: Don't add variable to window object
+    2. Forgotten timers or callbacks: stays in memory
+        setTimeout or a setInterval referencing some object in the callback is the most common way of memory leak
+        Use clearInterval() and clearTimeout();
+    3. Event listeners
+        Active event listener will prevent all variables captured in its scope from being garbage collected
+        Get rid of them using explicit use of removeEventListerner();
+        Also if we are going to use eventListener only once then we pass {once: true} object as 3rd parameter, and event lister wil remove after used once.
+    4. Closures
+        Function-scoped variables will be cleaned up after the function has exited the call stack,
+          and if there aren’t any references left outside of the function.
+
+
 Web components
-PWA
-AMP - Accelerator mobile pages
-Design patterns in javascript
-Why memory leaks happen
-Handle memoryleaks
+    Web components are custom, reusable, encapsulated HTML tags to use in web pages.
+    They build on the Web Component standards, will work across modern browsers,
+     and can be used with any JavaScript library or framework that works with HTML
+    Eg
+    // myElement.js
+    class MyElement extends HTMLElement {
+        constructor() { super(); /* ... */ }
+        connectedCallback() { /* ... */ } // browser calls this method when the element is added to the document
+        disconnectedCallback() { /* ... */  } // browser calls this method when the element is removed from the document
+        static get observedAttributes() { return [/* ... */]; } // list observed attributes
+        attributeChangedCallback(name, oldValue, newValue) { /* ... */ } // Triggers when any attribute value changes (listed above)
+    }
+    customElements.define('my-element', MyElement);
+
+    Use in webpage by loading myElement.js
+    /* <my-element> */
+
+
+
+
 Profiling
+    A JS profiler is an efficient tool to help you understand your code better – effectively finding, pinpointing and optimizing bottlenecks in your code.
+    Chrome has built in profiler
+
 Accessibility
+    Accessibility is the practice of making your websites usable by as many people as possible. We traditionally think of this as being about people with disabilities, but the practice of making sites accessible also benefits other groups such as those using mobile devices, or those with slow network connections.
+    You might also think of accessibility as treating everyone the same, and giving them equal opportunities, no matter what their ability or circumstances.
+
 Progressive rendering
+    Progressive Rendering means rendering the webpage in such a manner that high priority component will be rendered first and then low priority component will be rendered.
+
 REST
+    RESTful API is an interface that two computer systems use to exchange information securely over the internet.
+    Representational State Transfer (REST) is an architecture that imposes conditions and constraint on how an API should work.
+    How it works?
+        1. The client sends a request to the server. The client follows the API documentation to format the request in a way that the server understands.
+        2. The server authenticates the client and confirms that the client has the right to make that request.
+        3. The server receives the request and processes it internally.
+        4. The server returns a response to the client. The response contains information that tells the client whether the request was successful. The response also includes any information that the client requested.
+
+PWA
+    Progressive Web Apps (PWAs) are web apps that use service workers, manifests, and other web-platform features in combination with progressive enhancement to give users an experience on par with native apps.
+    PWAs provide a number of advantages to users — including being installable, progressively enhanced, responsively designed, re-engageable, linkable, discoverable, network independent, and secure.
+    PWA are Installable, we can install like Native app
+    Linkable, so you can share it by sending a URL.
+    Network independent, so it works offline or with a poor network connection.
+    Responsively designed, so it's usable on any device
+    Discoverable, so the contents can be found through search engines
+
+AMP - Accelerator mobile pages
+    It is an open source initiative that allows you to create web pages that load quickly on mobile browsers
+
+Design patterns in javascript
+    design patterns are classified into three main categories
+    creational: These patterns use different mechanisms used to create objects
+    structural: These patterns assemble objects and classes into larger structures.
+    behavioral: These patterns control the communication and the assignment of responsibilities between different objects
+
+    Creational
+    1. Singleton is a design pattern that ensures that a class has only one immutable instance.
+        
+        // Using Class
+        class MyClass {
+            constructor() {
+                if (MyClass._instance) {
+                    return MyClass._instance;
+                }
+                MyClass._instance = this; // If we dont want user to modify a copy, Object.freeze(this); 
+            }
+        }
+
+        var instanceOne = new MyClass()
+        var instanceTwo = new MyClass()
+
+        console.log(instanceOne === instanceTwo)
+        
+        // Using closeure and IIFE
+        let instance = (function() {
+            let privateVariables = 'Some privateValue';
+            function getPrivateValue() {
+                return privateVariables;
+            }
+            return { // Public interface
+                publicMethod1: getPrivateValue,
+                publicMethod2: function anotherFun() {
+                    return anotherVar;
+                },
+            }
+        })();
+
+    2. Factory Pattern
+        this pattern produce families of related objects without specifying concrete classes
+        Eg
+        const vehicleFactory = {
+            createVehicle: function(vehicleType) {
+                switch(vehicleType) {
+                    case 'Car':
+                        return new Car();
+                        break;
+                    case 'Truck':
+                        return new Truck();
+                        break;
+                }
+            }
+        }
+        const carObject = vehicleFactory.createVehicle('Car');
+
+    3. Builder Pattern
+        Builder pattern is used to create objects in "steps".
+        Means we create objects first and then we attach properties to it;
+        
+        const bug1 = { name: "Buggy McFly" };
+        const bug2 = { name: "Martiniano Buggland" };
+
+        const addFlyingAbility = (obj) => {
+            obj.fly = () => `My name is ${obj.name} and I can Fly now`;
+        }
+
+        addFlyingAbility(bug1);
+        addFlyingAbility(bug2);
+        console.log(bug2.fly())
+
+    4. Prototype Pattern
+        // Using Object.setPrototypeOf
+        // means we use obj2 prototype to attach methods to obj1, to use methods of obj2
+        Object.setPrototypeOf(obj1, obj2); // this will set prototype of obj2 to obj1;
+        console.log(obj1.methodOfObj2());
+
+        // Using Prototypel inheritance
+
+    Structural Patters
+    1. Adapter Pattern
+        Adapter allows two objects with incompatible interfaces to interact with each other
+        Eg. Mapper Function
+        let list = [{name: 'Delhi', value: '6.9'}];
+        let item = {name: 'Chennai', value: 8};
+        const toList = (item) => { // We are using this adapter function
+            return {...item, value: item.value.toFixed(1)};
+        }
+        const newItem = toList(item);
+        list.push(newItem);
+
+    2. Facade Pattern
+        https://dev.to/tomekbuszewski/facade-pattern-in-javascript-3on4
+        
+        
+Implement object oriented concepts
