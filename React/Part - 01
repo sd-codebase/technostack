@@ -1,0 +1,365 @@
+React Elements
+  React elements are written just like regular html elements. We can write any valid html as react element
+  
+  <h1>My Header</h1>
+  <p>My paragraph>
+  <button>My button</button>
+  
+  void html element must be self closing
+  
+  <img src="my-image.png" />
+
+React Element Attributes
+  JSX requires different syntax for react element Attributes
+  JSX is really JavaScript, and javascript requires camelCase naming convention
+  The most common example is the class attribute, which we write as className
+  
+  <div className="container"></div>
+
+React Element Styles
+  Its actually an object and when we want to pass an object for any attribute we use single curly bracket to pass an expression
+  
+  <h1 style={{ fontSize: 24, margin: '0 auto', textAlign: 'center' }}>My header</h1>
+  
+  Inline style cannot be written as string, instead we use object
+
+React Fragments
+  React has an element called a fragment.
+  React Requires all returned element should be wrapped under one element.
+  But we wrap it in hml element like div, browser will render and extra element.
+  So we use react fragment, this doesn't render in browser and can be used as wrapper for returned elements
+  We can write fragments in a regular or shorthand syntax: 
+  
+  <React.Fragment></React.Fragment> or <></>
+
+React Components
+  We can organized groups of elements into React components.
+  A basic function component is written similarly to a regular JavaScript function
+  There are difference between regular function and component
+  1. Component name will be starting with Capital letter
+  2. it must return single react element.
+
+  function App() {
+    return (
+      <div>Hello world!</div>
+    );
+  }
+
+React Props
+  React components can accept data passed to them called which is called as props. Passed from parent to a child
+
+  function App() {
+    return <User name="John Doe" />
+  }
+
+  function User({name}) {
+    return <h1>Hello, {name}</h1>; // Hello, John Doe!
+  }
+
+React Children Props
+  Props can also be passed by placing data between the opening and closing tags of a component.
+  Props that are passed this way are placed on the children property of props
+
+  function App() {
+    return (
+    <User>
+      <h1>Hello, John Doe!</h1>
+    </User>
+    );
+  }
+
+  function User({ children }) {
+    return children; // Hello, John Doe!
+  }
+
+React Conditionals
+  React components and elements can be conditionally displayed.
+  The one way could be different return statements as per condition 
+
+  function App() {
+    const isAuthUser = useAuth();
+
+    if (isAuthUser) {
+      // if our user is authenticated, let them use the app
+      return <AuthApp />;
+    }
+
+    // if user is not authenticated, show a different screen
+    return <UnAuthApp />;
+  }
+
+  Second way is To use the ternary operator
+
+  function App() {
+    const isAuthUser = useAuth();
+
+    return (
+      <>
+        <h1>My App</h1>
+        {isAuthUser ? <AuthApp /> : <UnAuthApp />}
+      </>
+    ) 
+  }
+
+React Lists
+  Lists of React components can be output using the .map() function.
+  One must include the key prop on the element or component over which you are looping.
+
+  function SoccerPlayers() {
+    const players = ["Messi", "Ronaldo", "Laspada"];
+
+    return (
+      <div>
+        {players.map((playerName) => (
+          <SoccerPlayer key={playerName} name={playerName} />
+        ))}
+      </div>
+    );
+  }
+
+React Context
+  React context allows us to pass data to our component tree without using props.
+  props drilling: 
+    The problem with props is that sometimes we pass them through components that don’t need to receive them. this is called as props drilling issue
+    Eg
+      function App() {
+        return (
+          <Body name="John Doe" />
+        );
+      } 
+
+      function Body({ name }) {
+        return (
+          <Greeting name={name} />
+        );
+      } 
+
+      function Greeting({ name }) {
+        return <h1>Welcome, {name}</h1>;
+      }
+      Body component is not using name, its just passing to child i.e Greeting
+
+      React context is used to overcome this prop drilling issue
+      To use Context, we use the createContext function from React.
+      The created context includes a Provider and a Consumer property, which are used each components.
+      We wrap the Provider around the component tree that we want to pass the given value down
+      we place the Consumer in the component we want to consume the value
+
+      Eg
+      const NameContext = createContext(''); // create context for name variable
+      <NameContext.Provider value="John Doe"> <NameContext.Provider> // Provider used from where to pass a value of name variable to component tree
+      <NameContext.Consumer> </NameContext.Consumer> // Consumer used in where to consume the name variable
+
+      import { createContext } from 'react';
+
+      const NameContext = createContext('');
+
+      function App() {
+        return (
+          <NameContext.Provider value="John Doe">
+            <Body />
+          <NameContext.Provider>
+        );
+      } 
+
+      function Body() {
+        return <Greeting />;
+      } 
+
+      function Greeting() {
+        return (
+          <NameContext.Consumer>
+            {name => <h1>Welcome, {name}</h1>}
+          </NameContext.Consumer>
+        );
+      }
+
+
+React Hooks
+  React hooks were introduced in React version 16.8 as a way to easily add reusable, stateful logic to React function components.
+  Hooks used to use all features which were just available in class component previously
+  we can create our own custom hooks that give our app custom functionality
+  useState
+  useEffect
+  useRef
+  useContext
+  useCallback
+  useMemo
+  There are more Hooks
+
+React useState Hook
+  it allows us to use stateful values in function components
+  when state is updated, our component re-renders, instead of a simple variable we use useState hook, to update view
+  we call useState at the top of our component and can pass it an initial value to put on its state variable
+  We use array destructuring on the value returned from useState to access (1) the stored state and (2) a function to update that state.
+  Eg
+  import { useState } from 'react';
+
+  function Counter() {
+    const [count, setCount] = useState(0);
+
+    function updateCount() {
+      setCount(count + 1);
+    }
+
+    return <button onClick={updateCount}>Count is: {count}</button>;
+  }
+
+  If we use simple variable for counter, react won't update view, as the state of component wont update if we use simple variables
+
+React useEffect Hook
+  useEffect is used to perform a side effect, if an value is changed which is coming from outside of effect function
+  value it must be included in the dependencies array, If that value changes, the effect function will be re-executed
+  Eg
+  function Mobile({ open }) {
+    useEffect(() => {
+      const body = document.querySelector("#__next");
+
+      if (open) {
+        body.classList.add("overflow-hidden");
+      } else {
+        body.classList.remove("overflow-hidden");
+      }
+    }, [open]);
+  
+    // ...
+  }
+
+  If we want to interact with the outside world such as fetching data through ajax calls, eg load initial data
+  Eg
+  import { useEffect } from 'react';
+
+  function PostList() {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+      fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(response => response.json())
+        .then(posts => setPosts(posts));
+    }, []);
+
+    return posts.map(post => <Post key={post.id} post={post} />
+  }
+
+React useRef
+  useRef allows us to get direct access to a JSX element.
+  To use useRef, call it, get the returned value, and put it on the ref prop for a given React element.
+  Eg
+  import { useRef } from 'react';
+
+  function MyComponent() {
+    const ref = useRef();
+
+    return <div ref={ref} />
+  }
+
+  Once a ref is attached to a given element, we can use the value stored on ref.current, to access the element itself.
+  Eg
+  import { useRef } from "react";
+
+  function Header() {
+    const inputRef = useRef();
+
+    const eventFromUser = () => {
+      inputRef.current.focus();
+    }
+    
+    return <input ref={inputRef} />
+  }
+
+React useContext
+  useContext provides an easier way of consuming context, than using the standard Context.Consumer component.
+  Eg
+  From earlier example, consumer component i.e. Greeting component
+  function Greeting() {
+    return (
+      <NameContext.Consumer>
+        {name => <h1>Welcome, {name}</h1>}
+      </NameContext.Consumer>
+    );
+  }
+  
+  We can rewrite consumer component code like this
+  function Greeting() {
+    const name = useContext(NameContext);
+
+    return (
+      <h1>Welcome, {name}</h1>
+    );
+  }
+
+React useCallback
+  It prevents functions from being recreated every time our component re-renders
+  It uses to optimize performance.
+  We cache a function between component re-render, as functions created when component re-renders
+  By using useCallback() we optimize rendering, for that we momoize function passed to a child component
+  Syntax: useCallback(function, [dependencies]);
+  If none of dependencies change react returns that function as it was before,  otherwise returns function you have passed;
+  In Other words, useCallback() caches a function and stops being recreated during re-renders, until one of the dependencies change;
+  Eg
+    funct Parent({prop1, prop2, prop3}) {
+      const [count, setCount] = useState(0);
+      const [name, setName] = useState('');
+      const functionToPassToChild = useCallback(() => {
+        console.log(`This function recreates when one of the property update from ${['prop1', 'prop3', 'count']}`)
+      } , ['prop1', 'prop3', 'count']);
+
+      return <>
+        <Child opertaion1 = {functionToPassToChild}></Child>
+      </>
+    }
+  // https://www.w3schools.com/react/react_usecallback.asp
+
+
+React useMemo
+  allows us to ‘memoize’ a given operation
+  Memoization makes it possible to remember the result of expensive calculations when they have already been made so we don’t have to make them again
+  Like useEffect and useCallback, useMemo accepts a callback function and a dependencies array.
+  But useMemo is intended to return a value
+  The useMemo Hook only runs when one of its dependencies update.
+  Eg
+  Suppose we have this expensive calculation function
+  const expensiveCalculation = (num) => {
+    console.log("Calculating...");
+    for (let i = 0; i < 1000000000; i++) {
+      num += 1;
+    }
+    return num;
+  };
+
+  In component we have used it
+  const App = () => {
+    ... some initial hooks
+    const [count, setCount] = useState(0);
+    const calculation = expensiveCalculation(count);
+    ... other stuff like return <></>
+  }
+
+  In this case on every re-render of App component expensiveCalculation(count) will get called;
+
+  To overcome this issue, we use useMemo()
+  const calculation = useMemo(() => expensiveCalculation(count), [count]);
+  Now if count's value changes, then only expensiveCalculation() will get called;
+  Also in useMemo's callback function must have return a value;
+
+useMemo() vs useCallback()
+useMemo() caches a value, useCallback() caches function;
+useMemo() runs function when one of the dependencies change, useCallback() re-create function when one of the dependancies change
+
+
+memo() function
+  React.memo is a higher order component. Means it takes a component as parameter and/or return component
+   If your component renders the same result given the same props,
+    you can wrap it in a call to React.memo for a performance boost in some cases by memoizing the result. 
+    This means that React will skip rendering the component, and reuse the last rendered result
+
+
+Rules of Hooks
+  Only Call Hooks at the Top Level
+    Don’t call Hooks inside loops, conditions, or nested functions
+  Only Call Hooks from React Functions i.e. Functional Components
+    Don’t call Hooks from regular JavaScript functions
+    Call Hooks from React function components.
+    Call Hooks from custom Hooks
+
+
