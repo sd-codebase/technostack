@@ -148,7 +148,7 @@ So jasmine also supports asynchronous specs, so we can use async await for befor
 
 ComponentFixture holds, component and rendered DOM
 For Unit testing we dont need rendered dom, so we will get only component instance, from fixture using componentInstance
-  const component = fisture.componentInstance;
+  const component = fixture.componentInstance;
 
 
 
@@ -599,7 +599,7 @@ describe(() => {
     service = await TestBed.get(DataService);
   });
 
-  beforeEach(async () => {
+  afterEach(async () => {
     subscriber.unsubscribe();
   });
 
@@ -613,6 +613,7 @@ describe(() => {
   it('Should get value after promise resolve', (done) => {
     service.returnPromise().then(val => {
       expect(val).toBe(25);
+      done();
     })
   })
 })
@@ -685,7 +686,7 @@ Declare variable in suite which holds for fake service
 Create spy obj to inject in testing module
   describe(() => {
     let fakeDataService: jasmine.SpyObj<DataService>;
-    const spy = jasmine.createSyObj<DataService>('<DataService>', spyObj);
+    const spy = jasmine.createSyObj<DataService>('DataService', spyObj);
   })
 
 Inject Fake serice in testing module in before method

@@ -144,7 +144,7 @@ Setters and geters i.e. accessor properties
 
 
 args vs arguments
-    When we have unknown number of parameters we use ...args (spread orerator) or arguments
+    When we have unknown number of parameters we use ...args (rest parameters) or arguments
     arguments is an array-like object
 
     eg
@@ -189,7 +189,7 @@ Prototype
     let student = new Student();
     When we create an object, __proto__ property gets added to instance,
      this property points to constructor functions's prototype property
-     Means in other words when we access __proto__ property it will return
+    Means in other words when we access __proto__ property it will return
       prototype proprty of constructor function
     We use prototype property to find properties and methods of a object
     We can implement inheritance in javascript using prototype Property
@@ -699,7 +699,7 @@ Promises
     Promise.resolve(value).then(resolved, rejected); // always resolve will call
     - Promise.all()
     returns a new Promise(). returned new promise resolves if all input promises resolves else
-     rejects immidiately if one or the promise rejects
+     rejects immidiately if one of the promise rejects
     - Promise.allSettled()
     returns a new Promise(). returned new promise resolves when all input promises settles
      (reject or fullfile)

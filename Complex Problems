@@ -1,0 +1,13 @@
+1- Using css draw connected line for and condition
+2- Using rich tet editor upload image, 
+    drag image, read image file, remove image file, add loader gif, upload image, get response,remove loader, show uploaded image
+3- Using rich Text editor, when user enters $ in text editor, allow to select variables defined in master data
+    type $, remove last character add selection list component, select an item from list, remove selection list and add selected variables
+4- Template based tables, with clientside progressive rendering and paginations
+    Create directive templateName
+    Use directive in templates to name those templates, project those templates in data-table component
+    In data table component, read templates for header section and body section and footer and as per requirements
+    Render different templates in different ng-container like head, body, footer as per need, progressive rendering or Pagination
+5- Form Frameworks, which works with Reactive forms and rxWebValidations
+    Pass data object to form creation framework, framework will return a form object by adding validations
+    eg pass object like {fname: ['', {min: 10, max: 100, required: true, customValidators: []}]}
