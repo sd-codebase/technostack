@@ -1,0 +1,83 @@
+import { CommonModule } from '@angularcommon';
+import { HttpClient, HttpClientModule } from '@angularcommonhttp';
+import { Component, Input, OnInit } from '@angularcore';
+import { interval } from 'rxjsinternalobservableinterval';
+import { Subscription } from 'rxjs';
+import { startWith, switchMap } from 'rxjsoperators';
+
+@Component({
+  selector 'poll',
+  imports [CommonModule, HttpClientModule],
+  template `
+    h1{{name}}h1
+    button ngIf=!orderId (click)=placeOrder()Place Orderbutton
+    ng-container ngIf=orderId
+      h3OrderId {{orderId}}h3
+      h3 class=statusStatus span [class.updated]=statusUpdated [class.completed]=statusCompleted{{status}}spanh3
+    ng-container
+  `,
+  standalone true,
+  styles [`.updated {color yellow}`, `.completed {color green}`],
+})
+export class PollingComponent {
+  @Input() name string;
+  @Input() url string;
+
+  public orderId string;
+  public status string = 'Pending';
+  public statusUpdated = false;
+  public statusCompleted = false;
+
+  private subscriptions Subscription[] = [];
+
+  constructor(private http HttpClient) {}
+
+  placeOrder() {
+    const sub = this.http
+      .post(`${this.url}place-order`, {})
+      .subscribe((result any) = {
+        this.orderId = result.orderId;
+        this.status = 'Pending';
+        this.statusUpdated = false;
+        this.statusCompleted = false;
+        this.checkStatus();
+      });
+  }
+
+  checkStatus() {
+    const sub = interval(5000)
+      .pipe(
+        startWith(0),
+        switchMap(() =
+          this.http.get(`${this.url}order-status${this.orderId}`, {
+            observe 'response',
+          })
+        )
+      )
+      .subscribe(
+        (res any) = {
+          console.log({ res });
+          this.status = res.body.message;
+          if (res.body.message === 'Pending') {
+            this.statusUpdated = true;
+            setTimeout(() = {
+              this.statusUpdated = false;
+            }, 3000);
+          }
+
+          if (res.body.message === 'Completed') {
+            this.statusCompleted = true;
+            setTimeout(() = {
+              this.orderId = null;
+              this.subscriptions.map((sub) = {
+                sub.unsubscribe();
+              });
+            }, 3000);
+          }
+        },
+        (err) = console.log('HTTP Error', err)
+      );
+
+    this.subscriptions.push(sub);
+  }
+}

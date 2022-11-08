@@ -1,0 +1,67 @@
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  Component,
+  Input,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+
+@Component({
+  selector: 'progressive-rendering',
+  imports: [CommonModule, HttpClientModule],
+  template: `
+    <h1>{{name}}</h1>
+    <button (click)="fetchData()">Fetch Data And Render</button>
+    <ng-template #vt let-title="title" let-desc="desc">
+      <div class="item">
+        <h2>{{title}}</h2>
+        <p>{{desc}}</p>
+      </div>
+    </ng-template>
+    <ng-container #vc></ng-container>  
+  `,
+  standalone: true,
+  styles: [
+    `.item {border: 1px solid gray; margin: 1rem; border-radius: 5px; padding: 0.5rem}`,
+  ],
+})
+export class ProgressiveRenderingComponent {
+  @Input() name: string;
+  @Input() url: string;
+
+  public data: any[];
+
+  @ViewChild('vc', { read: ViewContainerRef }) container: ViewContainerRef;
+  @ViewChild('vt', { read: TemplateRef }) template: TemplateRef<any>;
+
+  constructor(private http: HttpClient) {}
+
+  fetchData() {
+    this.http
+      .get(`${this.url}/large-list?len=20000`)
+      .subscribe((result: any[]) => {
+        this.data = result;
+        this.buildData(result);
+      });
+  }
+
+  buildData(list, itemSize = 200) {
+    let currentIndex = 0;
+
+    const inetrval = setInterval(() => {
+      let nextIndex = currentIndex + itemSize;
+
+      for (let i = currentIndex; i < nextIndex; i++) {
+        if (i >= list.length) {
+          clearInterval(inetrval);
+          break;
+        }
+        this.container.createEmbeddedView(this.template, this.data[i]);
+      }
+      console.log('batch');
+      currentIndex = currentIndex + itemSize;
+    }, 10);
+  }
+}

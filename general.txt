@@ -1,0 +1,40 @@
+Why typescript over javascript
+	Ts is superset of js
+	TypeScript always points out the compilation errors at the time of development (pre-compilation)
+	Typescript is JavaScript with static typing
+async/defer script
+	Normally browser parses html and render UI, when an script tag occurs in html, browser stops parsing document and execute scripts
+	This way it blocks rendering, once js script finish executing browser start parsing and rendring
+	By adding defer or async we instruct browser to not wait for script execution, 
+	Browser will render UI as well as load the script in background.
+	Async/defer
+	Both used to load script in background. There is only one difference in async and defer, defer will load all script and then browser will execute defer script one by one same as sequence they are written in html markup
+	Async will start immediate execution if any script loaded successfully, async doesn't wait to finish all script to load.
+
+Why angular?
+	Angular is a highly popular web development framework that offers rich user experiences, fast responsiveness, and code maintainability.
+	Supported by Google
+	Uses Typescript
+	Makes PWa and SPA's supports for SEO using SSR
+	Good testing support, supports TDD
+
+ReferenceError: Raised when an invalid reference is used.
+
+SyntaxError: Raised when a syntax error occurs while parsing JavaScript code.
+
+TypeError: Raised when the type of a variable is not as expected.
+
+element.getBoundingClientRect() // returns object consists of x,y
+
+polling in js
+	Polling is a process by which the client continuously request data from the server without any user interaction
+Angular stackblitz - https://stackblitz.com/edit/angular-ivy-zdvsjp
+
+implement client side progressive rendering
+Angular stackblitz - https://stackblitz.com/edit/angular-ivy-zdvsjp
+
+Server Sent Events = new EventSource() onopen, onmessage, onerror
+WebSocket = new WebSocket(), ws.send(), ws.close(). onopen, onmessage, onclose, onerror 
+WebWorkers = new Worker(), postMessage(), onmessage, ww.terminate()
+WebStorage = local, session, indexDb
+
