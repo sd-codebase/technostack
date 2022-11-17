@@ -1,0 +1,401 @@
+What is DOM?
+  DOM is a model for a structured document
+  The DOM is the application programming interface for well-defined HTML
+  When a browser loads an HTML page, its convert it to the Document Object Model (DOM).
+  The browser's produced DOM, from loaded html, constructs as a tree that consists of all your HTML page element as objects
+  We use scripting language to interact with HTML using DOM
+
+  The Document Object Model (DOM) is a cross-platform and language-independent interface that treats an XML or HTML document as a tree structure wherein each node is an object representing a part of the document. The DOM represents a document with a logical tree.
+  Each branch of the tree ends in a node, and each node contains objects. DOM methods allow programmatic access to the tree; with them one can change the structure, style or content of a document.[2] Nodes can have event handlers attached to them. Once an event is triggered, the event handlers get executed.[3]
+
+
+What is the virtual DOM?
+  -In memory representation of real dom
+  React creates a tree of custom objects representing a part of the DOM.
+  For example, instead of creating an actual DIV element containing a UL element, it creates a React.div object that contains a React.ul object.
+  It can manipulate these objects very quickly without actually touching the real DOM or going through the DOM API.
+  when it renders a component, it uses this virtual DOM to figure out what it needs to do with the real DOM to get the two trees to match.
+  Manipulate objects in memory is much faster that manipulating real dom
+
+What is reconciliation?
+  React Only Updates What’s Necessary
+  React DOM compares the element and its children to the previous one, and only applies the DOM updates to necessary dom
+  Process of sync real dom with virtual dom is called as reconciliation.
+
+Why to use VDOM and why not to use
+  Pros
+  -VDOM is Lightweight objects to manipulate
+  -VDOM boosts Speed and performance
+  -vdom is simple and clear structured
+  -Allows you to write declarative contents.
+
+  Cons
+  -Higher memory usage problems as its in memory representation
+  -It is not easily integrated into many other frameworks
+  -You can’t use it template engines.
+
+Error Boundries
+  Error boundaries are React components that
+   catch JavaScript errors anywhere in their child component tree,
+   log those errors, and display a fallback UI instead of the component tree that crashed.
+  A JavaScript error in a part of the UI shouldn’t break the whole app. To solve this problem react introduced error boundries components
+  Error boundaries do not catch errors for:
+    Event handlers 
+    Asynchronous code eg. setTimeout handlers
+    Server side rendering errors
+    Errors thrown in the error boundary component itself
+  We use 2 methods to define Error Boundries components. 1. static getDerivedStateFromError() 2. componentDidCatch()
+  A class component becomes error boundries component when we defines one of them or both methods
+  1. static getDerievedStateFromError()- used to renders fallback UI
+  2. componentDidCatch() - used to log errors
+
+  Eg
+  class ErrorBoundries extends React.Component{
+    constructor(props) {
+      super(props);
+      this.state = {error: false};
+    }
+
+    static getDerievedStateFromError(erro) {
+      this.setState({error: true});
+    }
+
+    componentDidCatch(error, errorInfo) {
+      clg({error, errorInfo});
+    }
+
+    render() {
+      if (this.state.error) {
+        return <div className="error">Error in treee</div>
+      } else {
+        return this.props.children;
+      }
+    }
+  }
+
+  JSX
+  <ErrorBoundries>
+    <MyComponentsTree/>
+  </ErrorBoundries>
+
+What is JSX
+  it is a syntax extension to JavaScript, 
+  JSX produces React “elements”
+  its XML-like code for elements and components
+  JSX into pure JavaScript function calls with React.createElement
+  Eg
+  <Login foo={...} bar={...} /> this get transpiled to 
+  React.createElement(Login, { foo: ..., bar: ... });
+
+React element vs components
+  A React Element is what gets returned from components
+  It's an object that virtually describes the DOM nodes that a component represents
+  in functional component return statement returns react element and in class component render method returns react elements
+  Components are made of elements
+
+Rendering elements
+  Elements are the smallest building blocks of React apps.
+  1. create root
+    - const root = ReactDOM.createRoot(
+        document.getElementById('root')
+      );
+  2. render in root element
+    - root.render(element);
+
+Components
+  independent, reusable pieces of code
+  components are like JavaScript functions
+  They accept input props and returns react elements
+
+Function and Class Components
+  Functinal Components
+    its simple JavaScript function with return statement
+  Class Components
+    Its simply es6 classes which extends to React.Component, and has render methor mandatory
+
+Composing Components
+  Components can refer to other components in their output
+  This lets us use the same component for any level.
+  We creates small small components and reuse them in other components to build large applications, 
+
+Props
+  we pass data to child components using props and props are used as input data for child components
+  Props are readonly and should not modify 
+
+Pure components
+  Props are read only, and component should not modify their own props
+  Those components doesn't modify their props are called pure components
+  Pure components always returns same results for same input props
+
+
+State
+  State allows React components to change their output over time in response to
+   user actions, network responses, and anything else, without violating 'Pure Components' rule.
+  State is similar to props, but it is private and fully controlled by the component.
+  The state is a built-in React object that is used to contain data or information about the component
+  In class component setState() method schedules an update to a component's state object. When state changes, the component responds by re-rendering
+  If we want use existing state while changing state, we should use callback in setState method
+  this.setState((state, props) => ({counter: state.counter + 1}));
+  state is not accessible outside the component
+
+Fragment 
+
+Portal
+
+forceUpdate()
+  By default when state or props changes, component call render method. but sometimes if render method is depends on external data,
+  we can tell react to update component using forceUpdate(), when we call forceUpdate(), shouldComponentUpdate() gets bypassed
+
+The Component Lifecycle
+  Each component has several “lifecycle methods” that you can override to run code at particular times in the process
+  Component has 3 phases
+  Mounting
+  Updating
+  Unmounting
+  4th phase is also there which is related error occurs in component tree i.e Error Handling
+  1. Mounting
+    1. constructor() - calls before mounting, we should only do 3 things in constructor- 
+     call super(props) method, initializing state, bind methods,
+     If we don't call super(props), then this.props will be undefined in constructor, this can lead bugs
+    2. static getDerivedStateFromProps() - getDerivedStateFromProps is invoked right before calling the render method, both on the initial mount and on subsequent updates
+      This method exists for rare use cases where the state depends on changes in props over time
+      eg. props has fname and lname, and we have fullname in state
+    3. render() - The render() method is the only required method in a class component.
+      when state or prop changes it gets invoked
+      The render() function should be pure, meaning that it does not modify component state,
+      render() will not be invoked if shouldComponentUpdate() returns false.
+    4.componentDidMount() -is invoked immediately after a component is mounted
+      we can do initial setup in this method, we can get initial data from api in this method
+    Legaecy - UNSAFE_componentWillMount()
+
+  2. Updating
+    1. static getDerivedStateFromProps()- if state is depends on props
+    2. shouldComponentUpdate() - This method only exists as a performance optimization
+      shouldComponentUpdate() is invoked before rendering when new props or state are being received.
+      Defaults to true
+      This method is not called for the initial render or when forceUpdate() is used.
+    3. render()
+    4. getSnapshotBeforeUpdate()
+      getSnapshotBeforeUpdate() is invoked right before the most recently rendered output is committed to e.g. the DOM
+      A snapshot value (or null) should be returned.
+      getSnapshotBeforeUpdate(prevProps, prevState) {}
+    5. componentDidUpdate() - componentDidUpdate() is invoked immediately after updating occurs
+      This method is not called for the initial render.
+      We can use this to manipulate on the DOM when the component has been updated.
+    Legecy - UNSAFE_componentWillUpdate(), UNSAFE_componentWillReceiveProps()
+
+  3. Unmounting
+    1. componentWillUnmount() - calls while component is being removed from dom
+    Perform any necessary cleanup in this method, such as invalidating timers, canceling network requests
+    should not call setState() cause components will never render after Unmounting
+  
+  4. Error Boundries, class becomes error boundries when we use one or both of the methods
+    1. static getDerivedStateFromError() - we can update state if error occurred in component tree, not itself
+    2. componentDidCatch() - we can log  errors occurred in component tree
+
+Event Handling
+  very similar to handling events on DOM elements with small syntactic difference
+  React events are named using camelCase
+  eg
+  onClick={handleCick}
+  onClick={() => this.handleClick(p1)}
+
+SyntheticEvent
+  SyntheticEvent is a cross-browser wrapper around the browser’s native event
+  It has the same interface as the browser’s native event, including stopPropagation() and preventDefault()
+  only difference between native and synthetic events is SyntheticEvent behaves identical on all browser
+  cross-browser compatible events, we don't need to worry about different browser.
+  onClick={handleCick}
+  const handleClick = (e) => e.target
+  here e is a SyntheticEvent, it behaves exactly same as native events
+  nativeEvent property of synthetic event will give you the access of native event of that browser
+
+Conditional rendering
+  We can render element of components depends on Conditional
+  1. if
+  {
+    if (true) {
+      return <Comp1/>
+    }
+    return <Comp2/>
+  }
+
+  2. && 
+  {
+    message && <h2>{message}</h2>
+  }
+
+  3. Inline If-Else (?:)
+  {
+    message ? <h2>{message}</h2> : null
+  }
+
+Rendering Multiple/List of Components
+  using map() method
+  const list = [1,2,3,4].map(num => <li>{num</li>})
+  return (<ul>{list}</ul>)
+  key={id} - gives stable identity to rendered component
+  Keys help React identify which items have changed, are added, or are removed
+  key should be a string, that uniquely identifies a list item among its siblings
+
+
+Forms
+  Html forms has ability to search new page when we submit the form, but in react we usually don't do that
+  Instead we collect user inputs from user through form, and we access input data
+  We need to control the behavoiur of react form, like we operate forms through js functions
+  these js function has access to form data, and submits using js functions
+  when we use these forms in component, these components are called controlled components
+  html form inputs typically maintain their own state
+  in react we use state to maintain state of form inputs
+
+  Eg
+  handleChange(event) {
+    // update value in state using event.target.value
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();// form will not submit
+  }
+
+  <form onSubmit={this.handleSubmit}>
+    <label>
+      Name:
+      <input type="text" value={this.state.value} onChange={this.handleChange} />
+    </label>
+    <input type="submit" value="Submit" />
+  </form>
+
+Lifting State Up
+  several components need to reflect the same changing data
+  we lifts the shared state up to their closest common ancestor
+  and share that state via props to required children
+
+Composition vs Inheritance
+  We can reuse code using these two methodologies, in react composition is recommended way to reuse code between components
+  Like in Dialog or sidebar, we can have dynamic content or unknown contents
+  props.children will enables us to use compositions
+  its basically like composing using things
+
+  Inheritance
+    its also wellknown method to reuse code, but sometimes it becomes complex to use
+
+Web Accessibility
+  also referred to as a11y
+  Web accessibility is design and creation a website which is accessible to all
+  Accessibility supports to allow assistive technology eg screen reader to interpret webpage
+  React supports WA by using standard HTML technique
+
+  WCAG-The 'Web Content Accessibility Guidelines' provides guidelines for creating accessible web sites.
+  eg
+  a11y issues guidline for image, headings, forms, tables, medias
+  like use alt attribute, media should not autoplay, for lists use ul,ol, dl, use a for link, use table and caption properly instead creating using getDerivedStateFromError
+  use fielset, legends, autocomplete whenever necessary
+
+  WAI-ARIA :  Web Accessibility Initiative - Accessible Rich Internet Applications
+  aria-* attributes fully supported in react
+  It defines a way to make Web content and Web applications more accessible to people with disabilities.
+  aria-* helps to inform details about element to user with disability
+
+
+  Semantic HTML
+  use semantic element instead of just divs
+  try to avoid div, instead use fragments
+
+  Accessible Forms
+  Create accessible forms, like use labeling, use htmlFor to label and id to input
+
+
+Code splitting
+  We use bundlers to bundle our app build files
+  We bundlers bundle all required files in one bundle
+  as our app grows it started causes greated load time, and app becoms slow at initial load
+  We can use code splitting methodologies to make initial load time lower
+  We write code is such way that bundler will create different small module files and loads as and when required
+  this also called as lazy loading
+  Eg
+  1. import()- We use dynamic imports using import() function
+    import('../calculate-module').then((loadedFileContent) => {
+      console.log(loadedFileContent.add(a, b));
+    })
+    this will enable lazy loading and bundler will not add calculate-module file in initial bundle, rather it will get loaded when required
+
+  2. React.lazy
+    React.lazy() lets you render lazily loaded component as simple componenet
+    const OtherComponent = React.lazy(() => import('./OtherComponent'));
+    this will automaticall load bundle which contains OtherComponent when this component renders first time
+    Rendering lazy loaded component
+    1. import Suspense and lazy from react
+      import {Suspense, lazy} from 'react'
+    2. load a component lazily
+      const OtherComponent = lazy(() => import('./OtherComponent'));
+    3. use lazy loaded component as child of Suspense
+      <Suspense fallback={<div>Loading...</div>}>
+        <OtherComponent />
+      </Suspense>
+    4. use fallback which will act as react element till the lazy loaded component get loaded
+      <Suspense fallback={<div>Loading...</div>}>
+      ...
+      </Suspense>
+    5. We can use lazy loaded routes
+      1.  import React, { Suspense, lazy } from 'react';
+      2.  const Home = lazy(() => import('./routes/Home'));
+          const About = lazy(() => import('./routes/About'));
+      3.  <Router>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+              </Routes>
+            </Suspense>
+          </Router>
+
+    React.lazy currently only supports default exports, if we already have named exports we can write intermediate module and export default from there
+
+
+Context
+  Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+  Suppose if we have deep nested components and we need to pass data to deeper lever, but some components in tree dont require that data
+  Still we need to pass data through them, this unecessary data passing will overcome by using context api
+  // TO-DO
+
+Forwarding Refs
+  Suppose we have nested components and an element which is in child component need to access in parent componenet
+  We can use forwardRef to enable access to an element in child from parent
+  We can wrap child element in React.forwardRef(). this will enables us to pass ref to child
+  Eg
+  const FancyButton = React.forwardRef((props, ref) => (
+    <button ref={ref} className="FancyButton">
+      {props.children}
+    </button>
+  ));
+
+  Create refereance in parent component 
+  const ref = React.createRef(); // useRef() hook afte 16.8
+  
+  Pass ref to child 
+  <FancyButton ref={ref}>Click me!</FancyButton>;
+
+  In child component, the second ref argument only exists when you define a component with React.forwardRef call
+
+Fragments
+  Its a common to return multiple elements from a component, but JSX wont, allow to return multiple elements
+  We can wrap those multiple elements in div, but that will add extra div in rendered dom
+  So React reagment comesin picture, it allows us to return multiple element and it wont render extra element in dom
+  we can use in 2 ways
+  1. React.Fragment
+    <React.Fragment>
+      <div>1</div>
+      <div>2</div>
+    </React.Fragment>
+  2. Short Syntax of React Fragment i.e. <></>
+    <>
+      <div>1</div>
+      <div>2</div>
+    </>
+  we can use keyed fragments also using key attribute in fragments
+
+HOC
+  a higher-order component is a function that takes a component and returns a new component.
+  
