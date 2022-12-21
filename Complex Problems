@@ -1,5 +1,5 @@
 1- Using css draw connected line for and condition
-2- Using rich tet editor upload image, 
+2- Using rich text editor upload image, 
     drag image, read image file, remove image file, add loader gif, upload image, get response,remove loader, show uploaded image
 3- Using rich Text editor, when user enters $ in text editor, allow to select variables defined in master data
     type $, remove last character add selection list component, select an item from list, remove selection list and add selected variables

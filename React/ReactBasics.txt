@@ -398,4 +398,90 @@ Fragments
 
 HOC
   a higher-order component is a function that takes a component and returns a new component.
-  
+  Its an advanced technique in React for reusing component logic
+
+
+JSX
+  JSX just provides syntactic sugar for the React.createElement() function.
+  Syntax of createElement React.createElement(component, props, ...children)
+  Eg JSX way
+    <MyButton color="blue" shadowSize={2}>
+      Click Me
+    </MyButton>
+  JS Function
+    React.createElement(
+      MyButton,
+      {color: 'blue', shadowSize: 2},
+      'Click Me'
+    )
+  If we are using jsx we have React reference available in same scope
+
+  Using Dot Notation for JSX 
+  import React from 'react';
+
+  const MyComponents = {
+    DatePicker: function DatePicker(props) {
+      return <div>Imagine a {props.color} datepicker here.</div>;
+    }
+  }
+
+  function BlueDatePicker() {
+    return <MyComponents.DatePicker color="blue" />;
+  }
+
+  Props Default to “True”
+  <MyTextBox autocomplete />
+  <MyTextBox autocomplete={true} />
+
+  CHildren in props
+  Anything embeded in start and end element is called as children, they are available in child compnent using props.children
+
+
+Optimizing Performance
+  React will lead to a fast user interface without doing much work to specifically optimize for performance
+  Still we can use some other technique to improve performance of app
+  - Use the Production Build
+  -Use Create React App to create react application and it will automatically gives you ability to build app using npm run build
+  - React provides us single build file of react hosted on cdn, we can use production file of react library
+  - Profiling Components with the DevTools Profiler, this will help understanding performance 
+  - Virtualize Long Lists like virtual scroll or progressive rendering, 
+  - Avoid Reconciliationby overrriding shouldComponentUpdate(){} and return false from it
+
+Portals
+  Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
+  Eg ReactDOM.createPortal(child, container)
+  child is any renderable elements, and children renders in container
+
+Reconciliation
+
+Static Type Checking using Flow and Typescript
+
+
+Strict Mode
+  <React.StrictMode>
+    {...children}
+  </React.StrictMode>
+  Like fragment doesn't get rendered in UI
+  StrictMode currently helps with:
+  - Identifying components with unsafe lifecycles
+  - Warning about legacy string ref API usage
+  - Warning about deprecated findDOMNode usage
+  - Detecting unexpected side effects
+  - Detecting legacy context API
+  - Ensuring reusable state
+
+Uncontrolled Components
+  In a controlled component, form data is handled by a React component
+  uncontrolled components, where form data is handled by the DOM itself.
+  To write an uncontrolled component, instead of writing an event handler for every state update, you can use a ref to get form values from the DOM
+
+
+Web Components provide strong encapsulation for reusable components
+while React provides a declarative library that keeps the DOM in sync with your data.
+
+
+SSR
+  SSR can improve performance if your application is small. But it can also degrade performance if it is heavy
+  It increases response time, but server is busy it will become worse
+  Displays content fast
+

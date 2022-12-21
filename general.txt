@@ -2,9 +2,10 @@ Why typescript over javascript
 	Ts is superset of js
 	TypeScript always points out the compilation errors at the time of development (pre-compilation)
 	Typescript is JavaScript with static typing
+
 async/defer script
 	Normally browser parses html and render UI, when an script tag occurs in html, browser stops parsing document and execute scripts
-	This way it blocks rendering, once js script finish executing browser start parsing and rendring
+	This way it blocks rendering, once js script finish executing, browser start parsing and rendring
 	By adding defer or async we instruct browser to not wait for script execution, 
 	Browser will render UI as well as load the script in background.
 	Async/defer

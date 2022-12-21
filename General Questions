@@ -1,0 +1,155 @@
+Current work
+  What is your daily routine at workplace?
+  Tell me about ur project?
+  What technology u r using?
+  How is login functionality works in ur project?
+
+
+Html
+  Elements
+  Tags vs Elements
+  What is semantic and non-semantic elements?
+  Block level and inline elemets?
+  What are new input types in html5?
+  How to store data at client site? - session local coockie
+  Have you worked with Websocket?
+  figure tag? figure vs img?
+
+
+Css
+  What is cascading style sheet?
+  different types of stylessheets. external, internal, inline.
+  what are css selectors?
+  What is box-model?
+  What is the Specificity?
+  Ways to center a div?
+  Ways to hide an element from user?
+  Css positions? static, rel, ab, fixed, sticky
+  display property and its values?
+
+Js
+  Hoisting?
+  data types in js?
+  let, const, var?
+  null vs undefined?
+  NaN === NaN
+  == vs ===
+  2 && 0?
+  5 || false?
+  Closure? example of closure? what is the use of closure?
+  Scope? output question?
+  event loop? output question?
+  Promise Object?
+  Asyn await
+  setTimeout and setInterval?
+  debounce vs throttle?
+  different ways to create object?
+  what is destructuring? Array and Object destructuring?
+  Arrow Functions?
+  prototype in js?
+  how to create inheritance or inhritence using prototype?
+  this keyword? output question?
+  Method chaining?
+  Call, apply bind?
+  map? filter?
+
+  console.log('B'+ 'a'+ +'c'+'a')
+
+  // Output Scope
+  for (var i = 0; i < 5; i++) {
+    console.log(i);
+    setTimeout(() => {
+      console.log(i);
+    }, 500)
+  }
+
+  // without changing var to let
+  for (var i= 0; i<5; i++) {
+    console.log(i);
+    (function(j) {setTimeout(() => {
+      console.log(j);
+    }, 500)})(i)
+  }
+
+  // Output event loop
+  function logActivities() {
+    console.log('Act 1')
+
+    setTimeout(() => {
+      console.log('Act 2');
+    });
+
+    Promise.resolve('Act 3')
+      .then((res) => console.log(res));
+
+    setTimeout(() => {
+      console.log('Act 4');
+    });
+    
+    Promise.reject('Act 5')
+      .catch((err) => console.log(err));
+
+  }
+
+  logActivities();
+
+  // output this keyword
+  const person = {
+    firstName: 'John',
+    latName: 'Deo',
+    displayFirstName: function() {
+      function greet() {
+        console.log(this.firstName);
+      } 
+      greet();
+    },
+    displayLastName: function() {
+      console.log(this.latName);
+    }
+  }
+
+  person.displayFirstName();
+  person.displayLastName();
+
+
+  // Program
+  const str = 'hello test test hello hi';
+
+
+Typescript
+  Type aliasing
+  Enums
+  Interface
+  Generics
+  Type inference
+  Type assertions
+  Define array of type Person
+
+
+Angular
+  What is component? Lifecycle Methods?
+  How to share data between components?
+  Dependancy injection?
+  Pipes? Pure, Impure, Async
+  Directive? types?
+  How to get data from BE api?
+  Interceptors?
+  Roting and router guards?
+  Observable? Obs vs Promise?
+  template query? viewChild content child?
+  Performance optimization techniques?
+  Reactive forms?
+
+
+
+
+
+
+
+
+
+
+
+
+
+

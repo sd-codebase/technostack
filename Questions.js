@@ -3,7 +3,7 @@ We create shallowcopy of object using spread operator or Object.assign method
     const person1 = {...person}
     const person1 = Object.assign({}, person)
 We create deepcopy using combining JSON.stringify() and JSON.parse() and clonedeep() of lodash
-    stringify doesn't copy functions and Date, so we can loop throught the objects and make copy of them, or we can use clonedeep()
+    stringify doesn't copy functions and Date, so we can loop through the objects and make copy of them, or we can use clonedeep()
 
 
 1	What is React?
@@ -23,9 +23,9 @@ We create deepcopy using combining JSON.stringify() and JSON.parse() and clonede
     <h1 className='heading-1'>{'Welcome to React world!'}</h1>
 
 4	What is the difference between Element and Component?
-    Element is an plain object describing what you want to show in browser in termsof DOM node
+    Element is an plain object describing what you want to show in browser in terms of DOM node
     Element can contain other element in their props
-    We create elementusing React.createElement()
+    We create element using React.createElement()
     Eg
     const element = React.createElement(
         'div',
@@ -75,7 +75,7 @@ We create deepcopy using combining JSON.stringify() and JSON.parse() and clonede
                 return <h1>{`Hello, ${this.props.message}`}</h1>
             }
         }
-    Class with render() method and function with return statement. bothe returns JSX
+    Class with render() method and function with return statement, both returns JSX
 
 6	When to use a Class Component over a Function Component?
     Previously state , lifecycle methods were available in class components only, but from 16.8 
@@ -89,7 +89,6 @@ We create deepcopy using combining JSON.stringify() and JSON.parse() and clonede
     When props or state changes, PureComponent will do a shallow comparison on both props and state
     Pure component extends to React.PureComponent
     Component extends React.component
-    When props or state changes, PureComponent will do a shallow comparison on both props and state.
     Components doesn't do comparison, so it component updates whenever shouldComponentUpdate() get called
 
 
@@ -164,7 +163,7 @@ We create deepcopy using combining JSON.stringify() and JSON.parse() and clonede
         inputEl.current.value = '25';
 
 21	What are forward refs?
-    When we want an access of dom element or component inparent componet from child component,
+    When we want an access of dom element or component in parent componet from child component,
     We use forwardRef(). its like extended version of ref
     Eg.
     1. Create reference in parent component
@@ -176,7 +175,7 @@ We create deepcopy using combining JSON.stringify() and JSON.parse() and clonede
             {props.children}
         </button>
     4. Wrap child componnet in forwardRef() method
-        const FancyButton = .forwardRef((props, ref) => (
+        const FancyButton = forwardRef((props, ref) => (
             <button ref={ref} className="FancyButton">
                 {props.children}
             </button>
@@ -222,10 +221,10 @@ We create deepcopy using combining JSON.stringify() and JSON.parse() and clonede
 
 33	What are the different phases of component lifecycle?
     Mounting, Updating, Unmounting
-    1. This phase covers initialization from constructor(), getDerivedStateFromProps(), render(), and componentDidMount() lifecycle methods.
-    2. In this phase, the component gets updated in two ways, sending the new props and updating the state either from setState() or forceUpdate()
+    1. This Mounting phase covers initialization from constructor(), getDerivedStateFromProps(), render(), and componentDidMount() lifecycle methods.
+    2. In Updating phase, the component gets updated in two ways, sending the new props and updating the state either from setState() or forceUpdate()
         This phase covers getDerivedStateFromProps(), shouldComponentUpdate(), render(), getSnapshotBeforeUpdate() and componentDidUpdate() lifecycle methods.
-    3.  In this last phase, the component is not needed and gets unmounted from the browser DOM. This phase includes componentWillUnmount() lifecycle method.
+    3.  In Unmounting phase, the component is not needed and gets unmounted from the browser DOM. This phase includes componentWillUnmount() lifecycle method.
 
 
 34	What are the lifecycle methods of React?
@@ -259,7 +258,7 @@ We create deepcopy using combining JSON.stringify() and JSON.parse() and clonede
 38	What is children prop?
     When we pass some children elements between start and end of componnet, this is called ass children props
     We can access these children element using props.children
-     const Child = ({children}) => (children);
+      const Child = ({children}) => (children);
 
 39	How to write comments in React?
     {/* Single line comment */}
@@ -611,7 +610,7 @@ How to achive each lifecycle method infunction component
   React Router v4 provides below 3 <Router> components:
 
   <BrowserRouter>
-  <HashRouter>
+    <HashRouter>
   <MemoryRouter>
   The above components will create browser, hash, and memory history instances.
 

@@ -46,11 +46,13 @@ this.router.navigate(['first-component'])
 this.activatedRoute.queryParams.subscribe(params => {
     this.name = params['name'];
 });
+//queryParams.subscribe() will give object
 
 // Access Path Params (id path param)
 this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
     this.id = +params.get('id')
 });
+//paramMap.subscribe() will give map
 
 
 

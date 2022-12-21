@@ -66,8 +66,8 @@ ts
   template: `
     <h2>Content projection</h2>
     <ng-content select="[question]"></ng-content>
-    <ng-content select="[h1]"></ng-content>
-    <ng-content select="[.text]"></ng-content>
+    <ng-content select="h1"></ng-content>
+    <ng-content select=".text"></ng-content>
   `
 })
 
