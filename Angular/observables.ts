@@ -177,3 +177,28 @@ The AsyncSubject is a Subject variant
 
     // Subscriber A: 0.4447275989704571
     // Subscriber B: 0.4447275989704571
+
+
+
+
+
+
+Observable Operators
+
+These below operator are used to work with inner observable that comes out of the outer observables
+
+The concatAll() operator subscribes to each "inner" Observable that comes out of the "outer" Observable,
+ and copies all the emitted values until that Observable completes, and goes on to the next one.
+ All of the values are in that way concatenated. Other useful flattening operators (called join operators) are
+
+mergeAll() — subscribes to each inner Observable as it arrives, then emits each value as it arrives
+switchAll() — subscribes to the first inner Observable when it arrives,
+ and emits each value as it arrives, but when the next inner Observable arrives,
+ unsubscribes to the previous one, and subscribes to the new one.
+
+exhaustAll() — subscribes to the first inner Observable when it arrives,
+ and emits each value as it arrives, discarding all newly arriving inner Observables until that first one completes, 
+ then waits for the next inner Observable.
+
+Just as many array libraries combine map() and flat() (or flatten()) into a single flatMap(),
+ there are mapping equivalents of all the RxJS flattening operators concatMap(), mergeMap(), switchMap(), and exhaustMap().

@@ -89,9 +89,12 @@ What is JSX
 
 React element vs components
   A React Element is what gets returned from components
-  It's an object that virtually describes the DOM nodes that a component represents
-  in functional component return statement returns react element and in class component render method returns react elements
-  Components are made of elements
+  Element is an object that virtually describes the DOM node or tree of dome nodes.
+  - React.createElement('div', null, 'Hello, world!'); arguments are type of dom node, props object, one or more child nodes
+  
+  A component is a class or function that returns a React element.
+  A component is a more powerful concept in React that allows us to build reusable pieces
+  Components can have their own state, lifecycle methods, and logic, and they can accept props.
 
 Rendering elements
   Elements are the smallest building blocks of React apps.
@@ -102,10 +105,14 @@ Rendering elements
   2. render in root element
     - root.render(element);
 
+  Or 
+  ReactDOM.render(<App/>, document.getElementById('root));
+
 Components
   independent, reusable pieces of code
   components are like JavaScript functions
   They accept input props and returns react elements
+  components have custom logic, own state
 
 Function and Class Components
   Functinal Components
@@ -116,7 +123,8 @@ Function and Class Components
 Composing Components
   Components can refer to other components in their output
   This lets us use the same component for any level.
-  We creates small small components and reuse them in other components to build large applications, 
+  We creates small small components and reuse them in other components to build large applications,
+  props.children will return child elements, we can use these children to compose a componenet 
 
 Props
   we pass data to child components using props and props are used as input data for child components
@@ -139,6 +147,8 @@ State
   state is not accessible outside the component
 
 Fragment 
+  Component can return single element, when we want to return multiple elements we use fragment, 
+  Fragments allows us to wrap multiple elements together to return from component
 
 Portal
 
