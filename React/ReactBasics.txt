@@ -495,3 +495,21 @@ SSR
   It increases response time, but server is busy it will become worse
   Displays content fast
 
+Prop types
+  prop types are a way to specify the type of props that a component expects to receive.
+  1- import PropTypes from 'prop-types';
+  2- function MyFunctionComponent(props) {
+      // component code goes here
+    }
+  3- MyFunctionComponent.propTypes = {
+      name: PropTypes.string,
+      age: PropTypes.number,
+      onClick: PropTypes.func,
+    };
+  Or
+  3. MyFunctionComponent.propTypes = {
+      name: PropTypes.string.isRequired,
+    };
+
+  If MyFunctionComponent rendered without name property or name property is not a string, warning will be logged to console.
+  

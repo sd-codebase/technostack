@@ -910,10 +910,6 @@ Use cases of Generator
     1. We can generate OTPs
     2. We can generate fake Ids
 
-
-
-
-
 how let and const compiles
     Variables declared using let and const are hoisted, but stays uninitialized, that's why the thow ReferenceError, if we access let and cons variable before declaration
     These variables declarations only become initialized when the are evaluted during runtime. 

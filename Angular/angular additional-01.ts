@@ -111,4 +111,17 @@ Progressive rendering
 
 
 
+    Performance in angular- lazy loading, 
+    Handle memory leaks
+    Typescript extending interface
+    access specifier in typescript
+    JS Performance
+    JS memory leaks
+    OOPS concepts in JS
+    State management using akita in angular or NGRX
+    What is mean By reactive programming
+    Observable vs Promise brush up
+    How to handle the errors of backend api in angular
+
+
 
